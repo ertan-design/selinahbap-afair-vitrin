@@ -223,7 +223,7 @@
   });
   $('#ilerleme-cubuk').style.width = Math.min(100, S.sayac.kabul / 1903 * 100) + '%';
   $('#ilerleme-yazi').textContent = S.sayac.kabul + ' / 1.903 kabul · ' + S.sayac.kirada + ' kirada · ilk boş kapı ' + (S.sonraki[0] ? kid(S.sonraki[0]) : '—');
-  $('#alt-bilgi').textContent = 'Derleme ' + S.zaman + ' · defter ' + S.sayac.defter_olay + ' olay (' + (S.sayac.defter_saglam ? 'zincir sağlam' : 'ZİNCİR BOZUK') + ') · ' + S.kutu;
+  $('#alt-bilgi').textContent = 'Son defter olayı ' + S.zaman + ' · defter ' + S.sayac.defter_olay + ' olay (' + (S.sayac.defter_saglam ? 'zincir sağlam' : 'ZİNCİR BOZUK') + ') · ' + S.kutu;
 
   /* ---- baslat ---- */
   document.documentElement.classList.toggle('hareketli', hareket); anahtar.checked = hareket;
