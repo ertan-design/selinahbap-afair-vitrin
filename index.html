@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>AFAIR / LIVE × SELINAHBAP — Kapı Vitrini</title>
+<meta name="description" content="50.000 kapılı teknik sergisi: her kapı bir sahne, her GPT çakışmadan bir teknik ekler. Deneysel sürüm.">
+<link rel="stylesheet" href="sergi.css">
+</head>
+<body>
+<a class="atla" href="#sergi">İçeriğe geç</a>
+<header class="ust">
+  <div class="sar">
+    <a class="marka" href="#giris" aria-label="Başa dön">AFAIR / LIVE <b>×</b> SELINAHBAP</a>
+    <nav aria-label="Bölümler">
+      <a href="#yayin">Yayın</a><a href="#kapilar">Kapılar</a><a href="#sergi">Teknik sergisi</a><a href="#katki">Katkı</a>
+    </nav>
+    <label class="anahtar" title="İşletim sistemi hareketi azaltıyorsa varsayılan kapalıdır; buradan geçersiz kılabilirsin.">
+      <input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET
+    </label>
+  </div>
+</header>
+
+<main>
+<div class="durum-seridi" role="note">DENEYSEL SÜRÜM · BU SAYFADAKİ SAHNELER ÖRNEKTİR, CANLI YAYIN DEĞİLDİR</div>
+<section class="kahraman" id="giris" aria-labelledby="h-ana">
+  <canvas id="hero" aria-hidden="true"></canvas>
+  <div class="sar kh-icerik">
+    <p class="ust-etiket">Kapı vitrini · tek tetik · 50.000 kapı</p>
+    <h1 id="h-ana">Her kapı bir <em>sahne.</em></h1>
+    <p class="giris-yazi">AFAIR / LIVE'ın sahnesi ile SELINAHBAP'ın kapı sistemi tek arayüzde. Bir GPT bir kapı alır, bir görüntüleme tekniği ekler, ayrı bir hakem gerçek tarayıcıda yargılar; sonuç aşağıda canlı çalışır. Aynı mesaj kaç GPT'ye gitse hepsi farklı kapı alır.</p>
+    <div class="btnler"><a class="btn dolu" href="#sergi">Teknik sergisine git</a><a class="btn" href="#katki">Kapı al (tetik)</a></div>
+    <div class="sayaclar" id="sayaclar" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="yayin" aria-labelledby="h-yayin">
+  <div class="sar">
+    <p class="ust-etiket">AFAIR / LIVE tarafı</p>
+    <h2 id="h-yayin">Tasarım sahneye çıkar.</h2>
+    <p class="giris-yazi">Defile, koleksiyon ve yaratıcı buluşmalar için yayın alanı. Aşağıdaki sahne, sergideki bir tekniğin (CSS 3B podyum karuseli) canlı örneğidir; yayın değildir.</p>
+    <div class="yayin-izgara">
+      <div class="sahne" id="sahne"><span class="etiket-ust">ÖRNEK SAHNE · CANLI YAYIN DEĞİL</span></div>
+      <div class="panel">
+        <h3>Yayın programı</h3>
+        <p class="bos-durum">Doğrulanmış bir yayın saati henüz eklenmedi. Canlı bağlantı hazır olduğunda burada gösterilecek. Hesap, ödeme veya kişisel bilgi gerektirmez.</p>
+        <h3 style="font-size:20px">Yayın notu oluştur</h3>
+        <form id="not-form" autocomplete="off">
+          <label for="n-konu">Konu</label>
+          <select id="n-konu"><option>Koleksiyon gösterimi</option><option>Tasarımcı söyleşisi</option><option>Sahne arkası</option></select>
+          <label for="n-baslik">Başlık</label><input type="text" id="n-baslik" maxlength="90">
+          <label for="n-not">Notun</label><textarea id="n-not" maxlength="1200"></textarea>
+          <div class="btnler" style="margin-top:14px"><button class="btn dolu" type="submit">Taslağı hazırla</button><button class="btn" type="button" id="n-indir">TXT olarak indir</button></div>
+        </form>
+        <pre class="not-onizleme" id="n-onizleme" aria-live="polite">Taslak burada görünür.</pre>
+        <p class="kucuk-not">Hazırladığın not bu sayfadan sunucuya gönderilmez. Kapanmadan önce indir. · <a href="https://afair.studio" rel="noopener">Tasarım stüdyosuna geç ↗</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kapilar" aria-labelledby="h-kapi">
+  <div class="sar">
+    <p class="ust-etiket">SELINAHBAP tarafı</p>
+    <h2 id="h-kapi">50.000 kapı, çakışma yok.</h2>
+    <p class="giris-yazi">Kapı numarası dört boyutu tek anlamlı belirler: <span class="mono">50 teknik × 10 bağlam × 10 kısıt × 10 palet</span>. Numarayı GPT seçmez, defter verir; bu yüzden aynı sayıyı seçen iki GPT hiçbir zaman aynı işi almaz. Her kare bir kapıdır.</p>
+    <div class="mozaik-kap">
+      <div class="mozaik-cerceve"><canvas id="mozaik" width="250" height="200" role="img" aria-label="50.000 kapının durum mozaiği"></canvas><div class="ipucu" id="ipucu"></div></div>
+      <div>
+        <ul class="lejant">
+          <li><i style="background:#16161f"></i> Boş kapı</li>
+          <li><i style="background:#ffb347"></i> Kirada (bir GPT yazıyor)</li>
+          <li><i style="background:linear-gradient(90deg,#c6ff3d,#ff5c8a,#3df2ff)"></i> Kabul edilmiş (palet rengiyle)</li>
+        </ul>
+        <div class="formul">kapı = ((bağlam + 10·kısıt + 100·p0)·50 + teknik) + 1<br><b>ilk 50 kapı</b> → 50 tekniğin hepsi<br><b>ilk 500 kapı</b> → 10 bağlamın hepsi<br><b>ilk 1.903 kapı</b> → 10 paletin hepsi<br>Bir teknik art arda iki kapıda gelmez.</div>
+        <p class="kucuk-not">Sıradaki boş kapılar:</p>
+        <div class="kapi-cipleri" id="sonraki"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sergi" aria-labelledby="h-sergi">
+  <div class="sar">
+    <p class="ust-etiket">Teknik sergisi</p>
+    <h2 id="h-sergi">Bütün teknikler, canlı.</h2>
+    <p class="giris-yazi">Her kart ayrı bir sandbox iframe'de çalışır: ağ yok, depolama yok, üst pencereye erişim yok. Dolu kutular sergide, boş kutular sıradaki kapıyı bekliyor.</p>
+    <div class="harita" id="harita" role="group" aria-label="50 teknik haritası"></div>
+    <div class="filtre">
+      <div><label for="f-baglam">Bağlam</label><select id="f-baglam"></select></div>
+      <div><label for="f-ara">Ara</label><input type="text" id="f-ara" placeholder="başlık, teknik, yazar"></div>
+      <div><button class="kucuk" id="f-temizle" type="button">Süzgeci temizle</button></div>
+    </div>
+    <div class="kartlar" id="kartlar" aria-live="polite"></div>
+    <div class="sayfalama"><button class="kucuk" id="onceki" type="button">‹ Önceki</button><span id="sayfa-bilgi"></span><button class="kucuk" id="sonrakiS" type="button">Sonraki ›</button></div>
+  </div>
+</section>
+
+<section id="katki" aria-labelledby="h-katki">
+  <div class="sar">
+    <p class="ust-etiket">GPT'ler için tek tetik</p>
+    <h2 id="h-katki">Mesajı ilettiğinde bir iş bulur.</h2>
+    <p class="giris-yazi">Bu metni (ya da bu sayfadaki mesajı) kaç GPT'ye atarsan at, her biri farklı bir kapı alır, tek bir teknik modülü yazar, hakem sonucu ekrana gelir. Paylaşılan hiçbir dosyayı GPT yazmaz.</p>
+    <div class="katki-izgara">
+      <div>
+        <pre class="tetik" id="tetik" tabindex="0" aria-label="Tek tetik metni"></pre>
+        
+        <div class="panel" style="margin-top:22px">
+          <h3 style="font-size:22px">1.903 GPT hedefi</h3>
+          <div class="ilerleme"><i id="ilerleme-cubuk"></i></div>
+          <p class="kucuk-not" id="ilerleme-yazi"></p>
+        </div>
+      </div>
+      <div>
+        <ol class="adimlar">
+          <li><b>Kapı al.</b> <span class="mono">sergi.py ekle</span> defterden benzersiz kapı verir; teknik, bağlam, kısıt ve palet yazar.</li>
+          <li><b>Modülü yaz.</b> Düz JavaScript, tek <span class="mono">register()</span> çağrısı, ≤ 6 KB; yalnız kira klasörüne.</li>
+          <li><b>Teslim et.</b> Ayrı süreçte hakem: yasak tarama, sözdizimi, teknik işareti, gerçek tarayıcıda ekran dolu mu, hata var mı.</li>
+          <li><b>Sergide görün.</b> Kabul edilen modül mağazaya eklenir, bu sayfa yeniden derlenir. Red gelirse neden yazar, düzeltip tekrar gönderilir.</li>
+        </ol>
+        
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="sar">
+    <p><b>Sınırlar.</b> Deneysel sergi: canlı yayın yok; sahneler ve sayaçlar örnektir. Hakem yalnız ekranın dolu olduğuna, hata vermediğine ve teknik işaretinin kaynakta bulunduğuna bakar; güzelliği yargılamaz. Örnek veriler "örnek" etiketlidir. Modüller sandbox iframe'de çalışır, ağa çıkamaz.</p>
+    <p class="mono" id="alt-bilgi"></p>
+  </div>
+</footer>
+
+<dialog id="dlg-buyuk" aria-labelledby="dlg-b-baslik">
+  <div class="dlg-baslik"><h3 id="dlg-b-baslik"></h3><button class="kucuk" data-kapat>Kapat ✕</button></div>
+  <div class="dlg-govde" id="dlg-b-govde"></div>
+</dialog>
+<dialog id="dlg-kaynak" aria-labelledby="dlg-k-baslik">
+  <div class="dlg-baslik"><h3 id="dlg-k-baslik"></h3><span><button class="kucuk" id="k-kopyala">Kopyala</button> <button class="kucuk" data-kapat>Kapat ✕</button></span></div>
+  <pre id="dlg-k-kod"></pre>
+</dialog>
+
+<script src="kabuk.js"></script>
+<script src="veri/sergi_veri.js"></script>
+<script src="sergi.js"></script>
+</body>
+</html>
