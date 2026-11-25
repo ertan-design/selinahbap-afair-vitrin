@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Mini zaman çizelgesi · Mini zaman çizelgesi · T000089</title>
+<meta name="description" content="Anahtar kareleri sıralayan küçük sekanslayıcı; oynatma çizgisi 5 saniyelik döngüde ilerler.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000089</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Mini zaman çizelgesi"></div>
+  <h1>Mini zaman çizelgesi</h1>
+  <p class="ac">Anahtar kareleri sıralayan küçük sekanslayıcı; oynatma çizgisi 5 saniyelik döngüde ilerler.</p>
+  <ul class="etk"><li class="t">Mini zaman çizelgesi</li><li>Tasarımcı duvarı</li><li>Standart</li><li><span class="renkler"><i style="background:#07080f"></i><i style="background:#3df2ff"></i><i style="background:#ff3d9a"></i><i style="background:#7a5cff"></i></span>Şehir neonu</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>register({
+  baslik: 'Mini zaman çizelgesi',
+  aciklama: 'Anahtar kareleri sıralayan küçük sekanslayıcı; oynatma çizgisi 5 saniyelik döngüde ilerler.',
+  mount: function (host, api) {
+    var P = api.palette, c = document.createElement('canvas'), x, dur, last = 0;
+    var SURE = 5;
+    var kareler = [
+      { t: 0, v: 0.1, e: 'Başla' }, { t: 1.4, v: 0.8, e: 'Yüksel' },
+      { t: 2.6, v: 0.35, e: 'Düş' }, { t: 3.8, v: 0.95, e: 'Zıpla' }, { t: 5, v: 0.1, e: 'Dön' }
+    ];
+    c.style.cssText = 'display:block;width:100%;height:100%';
+    host.appendChild(c);
+    x = c.getContext('2d');
+    function fit() {
+      c.width = Math.max(2, api.width * api.dpr | 0);
+      c.height = Math.max(2, api.height * api.dpr | 0);
+    }
+    fit();
+    api.onResize(fit);
+    function deger(t) {
+      for (var i = 0; i &lt; kareler.length - 1; i++) {
+        var a = kareler[i], b = kareler[i + 1];
+        if (t &gt;= a.t &amp;&amp; t &lt;= b.t) {
+          var u = (t - a.t) / (b.t - a.t);
+          u = u * u * (3 - 2 * u); // yumusatma
+          return a.v + (b.v - a.v) * u;
+        }
+      }
+      return kareler[0].v;
+    }
+    dur = api.raf(function () {
+      var now = api.time();
+      last = now;
+      var s = api.dpr, W = api.width, H = api.height;
+      var x0 = 30, x1 = W - 30, yAlt = H * 0.8, yUst = H * 0.3;
+      var t = (now / 1000) % SURE;
+      x.setTransform(1, 0, 0, 1, 0, 0);
+      x.fillStyle = P.bg;
+      x.fillRect(0, 0, c.width, c.height);
+      x.setTransform(s, 0, 0, s, 0, 0);
+      // eksen
+      x.strokeStyle = P.fg; x.globalAlpha = 0.2; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(x0, yAlt); x.lineTo(x1, yAlt); x.stroke();
+      x.globalAlpha = 1;
+      // egri
+      x.strokeStyle = P.a; x.lineWidth = 2; x.beginPath();
+      for (var px = 0; px &lt;= x1 - x0; px += 2) {
+        var tt = px / (x1 - x0) * SURE;
+        var yy = yAlt - deger(tt) * (yAlt - yUst);
+        if (px === 0) x.moveTo(x0, yy); else x.lineTo(x0 + px, yy);
+      }
+      x.stroke();
+      // anahtar kareler
+      x.font = '11px system-ui,sans-serif';
+      for (var k = 0; k &lt; kareler.length; k++) {
+        var kx = x0 + kareler[k].t / SURE * (x1 - x0), ky = yAlt - kareler[k].v * (yAlt - yUst);
+        x.fillStyle = P.b;
+        x.beginPath();
+        x.moveTo(kx, ky - 6); x.lineTo(kx + 6, ky); x.lineTo(kx, ky + 6); x.lineTo(kx - 6, ky);
+        x.closePath(); x.fill();
+        x.fillStyle = P.fg;
+        x.fillText(kareler[k].e, kx - 14, yAlt + 16);
+      }
+      // oynatma cizgisi
+      var ph = x0 + t / SURE * (x1 - x0);
+      x.strokeStyle = P.c; x.lineWidth = 2;
+      x.beginPath(); x.moveTo(ph, yUst - 10); x.lineTo(ph, yAlt + 4); x.stroke();
+      x.fillStyle = P.fg;
+      x.fillText('Zaman ' + t.toFixed(2) + ' sn · değer ' + deger(t).toFixed(2), 14, 20);
+    });
+    return function () { dur(); };
+  }
+});
+</pre></details>
+  <p class="alt">T000089 · alt-19 · 2833 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"register({\n  baslik: 'Mini zaman çizelgesi',\n  aciklama: 'Anahtar kareleri sıralayan küçük sekanslayıcı; oynatma çizgisi 5 saniyelik döngüde ilerler.',\n  mount: function (host, api) {\n    var P = api.palette, c = document.createElement('canvas'), x, dur, last = 0;\n    var SURE = 5;\n    var kareler = [\n      { t: 0, v: 0.1, e: 'Başla' }, { t: 1.4, v: 0.8, e: 'Yüksel' },\n      { t: 2.6, v: 0.35, e: 'Düş' }, { t: 3.8, v: 0.95, e: 'Zıpla' }, { t: 5, v: 0.1, e: 'Dön' }\n    ];\n    c.style.cssText = 'display:block;width:100%;height:100%';\n    host.appendChild(c);\n    x = c.getContext('2d');\n    function fit() {\n      c.width = Math.max(2, api.width * api.dpr | 0);\n      c.height = Math.max(2, api.height * api.dpr | 0);\n    }\n    fit();\n    api.onResize(fit);\n    function deger(t) {\n      for (var i = 0; i < kareler.length - 1; i++) {\n        var a = kareler[i], b = kareler[i + 1];\n        if (t >= a.t && t <= b.t) {\n          var u = (t - a.t) / (b.t - a.t);\n          u = u * u * (3 - 2 * u); // yumusatma\n          return a.v + (b.v - a.v) * u;\n        }\n      }\n      return kareler[0].v;\n    }\n    dur = api.raf(function () {\n      var now = api.time();\n      last = now;\n      var s = api.dpr, W = api.width, H = api.height;\n      var x0 = 30, x1 = W - 30, yAlt = H * 0.8, yUst = H * 0.3;\n      var t = (now / 1000) % SURE;\n      x.setTransform(1, 0, 0, 1, 0, 0);\n      x.fillStyle = P.bg;\n      x.fillRect(0, 0, c.width, c.height);\n      x.setTransform(s, 0, 0, s, 0, 0);\n      // eksen\n      x.strokeStyle = P.fg; x.globalAlpha = 0.2; x.lineWidth = 1;\n      x.beginPath(); x.moveTo(x0, yAlt); x.lineTo(x1, yAlt); x.stroke();\n      x.globalAlpha = 1;\n      // egri\n      x.strokeStyle = P.a; x.lineWidth = 2; x.beginPath();\n      for (var px = 0; px <= x1 - x0; px += 2) {\n        var tt = px / (x1 - x0) * SURE;\n        var yy = yAlt - deger(tt) * (yAlt - yUst);\n        if (px === 0) x.moveTo(x0, yy); else x.lineTo(x0 + px, yy);\n      }\n      x.stroke();\n      // anahtar kareler\n      x.font = '11px system-ui,sans-serif';\n      for (var k = 0; k < kareler.length; k++) {\n        var kx = x0 + kareler[k].t / SURE * (x1 - x0), ky = yAlt - kareler[k].v * (yAlt - yUst);\n        x.fillStyle = P.b;\n        x.beginPath();\n        x.moveTo(kx, ky - 6); x.lineTo(kx + 6, ky); x.lineTo(kx, ky + 6); x.lineTo(kx - 6, ky);\n        x.closePath(); x.fill();\n        x.fillStyle = P.fg;\n        x.fillText(kareler[k].e, kx - 14, yAlt + 16);\n      }\n      // oynatma cizgisi\n      var ph = x0 + t / SURE * (x1 - x0);\n      x.strokeStyle = P.c; x.lineWidth = 2;\n      x.beginPath(); x.moveTo(ph, yUst - 10); x.lineTo(ph, yAlt + 4); x.stroke();\n      x.fillStyle = P.fg;\n      x.fillText('Zaman ' + t.toFixed(2) + ' sn · değer ' + deger(t).toFixed(2), 14, 20);\n    });\n    return function () { dur(); };\n  }\n});\n","ayar":{"palet":{"bg":"#07080f","fg":"#e9f1ff","a":"#3df2ff","b":"#ff3d9a","c":"#7a5cff"},"rm":false,"seed":89,"id":"T000089"},"baslik":"Mini zaman çizelgesi","t":"js-zaman-cizelgesi"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

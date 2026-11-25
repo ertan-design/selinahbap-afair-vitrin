@@ -1,0 +1,122 @@
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000001.html	T000001	Canvas 2D parcacik izi	Canvas 2D parçacık sistemi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000002.html	T000002	Gürültü akış alanı	Gürültü akış alanı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000003.html	T000003	Podyumda boids sürüsü	Boids sürü davranışı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000004.html	T000004	Verlet kumas simulasyonu	Verlet kumaş simülasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000005.html	T000005	Podyumda metaball kumaş	Metaball alan eşiği
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000006.html	T000006	Podyumda Gray-Scott kumaşı	Reaksiyon-difüzyon (Gray-Scott)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000007.html	T000007	Voronoi hücreleri	Voronoi hücreleri
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000008.html	T000008	Podyumda Bayer ışığı	Dithering / halftone
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000009.html	T000009	Podyumda ASCII ışığı	ASCII dönüştürücü
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000010.html	T000010	Kumaşta piksel sıralama	Piksel sıralama (glitch)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000011.html	T000011	İpek perde: alan çarpıtma	WebGL2 parça gölgelendirici
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000012.html	T000012	Podyumda SDF ışın yürüyüşü	SDF ışın yürüyüşü
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000013.html	T000013	GPU noktalari (50.000)	GPU noktaları (50.000)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000014.html	T000014	Akiskan simulasyonu	Akışkan simülasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000015.html	T000015	Kromatik sapma ve film greni	Kromatik sapma + film greni
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000016.html	T000016	Ipek iridesansi	İridesans (ipek parlaması)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000017.html	T000017	Tuvalden doku	Tuvalden doku (video dokusu)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000018.html	T000018	WebGPU parçacıkları	WebGPU hesaplama parçacıkları
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000019.html	T000019	Gauss splat noktaları	Gauss splat noktaları
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000020.html	T000020	İşçide çizim	OffscreenCanvas + Worker
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000021.html	T000021	SVG sıvı kumaş	SVG filtre: sıvı kumaş
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000022.html	T000022	SVG yol morph	SVG yol morph
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000023.html	T000023	SVG çizim animasyonu	SVG çizim animasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000024.html	T000024	SVG maske geçişi	SVG maske / clipPath geçişi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000025.html	T000025	CSS 3B dönme podyumu	CSS 3B dönme (podyum/karusel)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000026.html	T000026	CSS kaydırma güdümlü animasyon	CSS kaydırma güdümlü animasyon
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000027.html	T000027	View Transitions geçişi	View Transitions API
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000028.html	T000028	@property ile animasyonlu gradyan	@property ile animasyonlu gradyan
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000029.html	T000029	Silüet geçidi	clip-path poligon morph
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000030.html	T000030	Cam paneller	backdrop-filter cam
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000031.html	T000031	Değişken harf podyumu	Değişken yazı tipi ekseni
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000032.html	T000032	Podyum boyası	CSS Paint API (Houdini)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000033.html	T000033	Podyumda açılan koleksiyon kartı	@starting-style giriş animasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000034.html	T000034	Kumaş numunesine bağlanan ipucu balonu	CSS anchor konumlama
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000035.html	T000035	Yayla işaretten işarete yürüyen figür	WAAPI + linear() yay eğrisi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000036.html	T000036	Sıra değişince kayan koleksiyon kartları	FLIP yerleşim animasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000037.html	T000037	Harf harf yükselen defile başlığı	Kademeli metin açılışı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000038.html	T000038	Yay çözücü: üç sönüm, tek hedef	Yay çözücü (spring solver)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000039.html	T000039	Mini zaman çizelgesiyle podyum yürüyüşü	Mini zaman çizelgesi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000040.html	T000040	Podyum sahnesinde derinlik paralaksı	Paralaks (jiroskop/imleç)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000041.html	T000041	Mıknatıs imleç: kumaş rozetleri	Mıknatıs imleç
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000042.html	T000042	Podyum müziği spektrumu	WebAudio spektrum
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000043.html	T000043	Vuruşla atan podyum ışığı	Ses-görsel eşleşmesi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000044.html	T000044	IntersectionObserver koreografisi	IntersectionObserver koreografisi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000045.html	T000045	ResizeObserver ile duyarlı çizim	ResizeObserver ile duyarlı çizim
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000046.html	T000046	Video kare senkronu	Video kare senkronu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000047.html	T000047	Tuval kaydı (MediaRecorder)	Tuval kaydı (MediaRecorder)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000048.html	T000048	Tek bellek bloğunda 50.000 kapı	Tek bellek bloğunda 50.000 kapı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000049.html	T000049	Hilbert eğrisi yerleşimi	Hilbert eğrisi yerleşimi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000050.html	T000050	Treemap (kareli ağaç haritası)	Treemap (kareli ağaç haritası)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000051.html	T000051	Canvas 2D parçacık sistemi	Canvas 2D parçacık sistemi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000052.html	T000052	Gürültü akış alanı	Gürültü akış alanı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000053.html	T000053	Boids sürü davranışı	Boids sürü davranışı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000054.html	T000054	Verlet kumaş simülasyonu	Verlet kumaş simülasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000055.html	T000055	Metaball alan eşiği	Metaball alan eşiği
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000056.html	T000056	Reaksiyon-difüzyon	Reaksiyon-difüzyon (Gray-Scott)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000057.html	T000057	Voronoi hücreleri	Voronoi hücreleri
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000058.html	T000058	Sıralı kesme (dithering)	Dithering / halftone
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000059.html	T000059	ASCII dönüştürücü	ASCII dönüştürücü
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000060.html	T000060	Piksel sıralama	Piksel sıralama (glitch)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000061.html	T000061	WebGL2 parça gölgelendirici	WebGL2 parça gölgelendirici
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000062.html	T000062	SDF ışın yürüyüşü	SDF ışın yürüyüşü
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000063.html	T000063	GPU noktaları (50.000)	GPU noktaları (50.000)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000064.html	T000064	Akışkan simülasyonu	Akışkan simülasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000065.html	T000065	Kromatik sapma ve film greni	Kromatik sapma + film greni
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000066.html	T000066	İridesans (ipek parlaması)	İridesans (ipek parlaması)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000067.html	T000067	Tuvalden doku (video dokusu)	Tuvalden doku (video dokusu)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000068.html	T000068	WebGPU hesaplama parçacıkları	WebGPU hesaplama parçacıkları
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000069.html	T000069	Gauss splat noktaları	Gauss splat noktaları
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000070.html	T000070	OffscreenCanvas ve Worker	OffscreenCanvas + Worker
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000071.html	T000071	SVG filtre: sıvı kumaş	SVG filtre: sıvı kumaş
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000072.html	T000072	SVG yol morph	SVG yol morph
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000073.html	T000073	SVG çizim animasyonu	SVG çizim animasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000074.html	T000074	SVG maske / clipPath geçişi	SVG maske / clipPath geçişi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000075.html	T000075	CSS 3B dönme (karusel)	CSS 3B dönme (podyum/karusel)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000076.html	T000076	CSS kaydırma güdümlü animasyon	CSS kaydırma güdümlü animasyon
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000077.html	T000077	View Transitions: tasarimci duvari	View Transitions API
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000078.html	T000078	@property ile animasyonlu gradyan	@property ile animasyonlu gradyan
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000079.html	T000079	clip-path poligon morf	clip-path poligon morph
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000080.html	T000080	backdrop-filter cam	backdrop-filter cam
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000081.html	T000081	Degisken yazi tipi ekseni	Değişken yazı tipi ekseni
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000082.html	T000082	CSS Paint API (Houdini)	CSS Paint API (Houdini)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000083.html	T000083	@starting-style giris animasyonu	@starting-style giriş animasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000084.html	T000084	CSS anchor konumlama	CSS anchor konumlama
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000085.html	T000085	WAAPI linear() yay eğrisi	WAAPI + linear() yay eğrisi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000086.html	T000086	FLIP yerleşim animasyonu	FLIP yerleşim animasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000087.html	T000087	Kademeli metin açılışı	Kademeli metin açılışı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000088.html	T000088	Yay çözücü (spring solver)	Yay çözücü (spring solver)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000089.html	T000089	Mini zaman çizelgesi	Mini zaman çizelgesi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000090.html	T000090	Paralaks (jiroskop/imleç)	Paralaks (jiroskop/imleç)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000091.html	T000091	Mıknatıs imleç	Mıknatıs imleç
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000092.html	T000092	WebAudio spektrum	WebAudio spektrum
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000093.html	T000093	Ses-görsel eşleşmesi	Ses-görsel eşleşmesi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000094.html	T000094	IntersectionObserver koreografisi	IntersectionObserver koreografisi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000095.html	T000095	ResizeObserver ile duyarlı çizim	ResizeObserver ile duyarlı çizim
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000096.html	T000096	Video kare senkronu	Video kare senkronu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000097.html	T000097	Tuval kaydı (MediaRecorder)	Tuval kaydı (MediaRecorder)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000098.html	T000098	Tek bellek bloğunda 50.000 kapı	Tek bellek bloğunda 50.000 kapı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000099.html	T000099	Hilbert eğrisi yerleşimi	Hilbert eğrisi yerleşimi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000100.html	T000100	Treemap (kareli ağaç haritası)	Treemap (kareli ağaç haritası)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000101.html	T000101	Canvas 2D parçacık sistemi	Canvas 2D parçacık sistemi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000102.html	T000102	Gürültü akış alanı	Gürültü akış alanı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000103.html	T000103	Boids sürü davranışı	Boids sürü davranışı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000104.html	T000104	Verlet kumaş simülasyonu	Verlet kumaş simülasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000105.html	T000105	Metaball alan eşiği	Metaball alan eşiği
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000106.html	T000106	Reaksiyon-difüzyon (Gray-Scott)	Reaksiyon-difüzyon (Gray-Scott)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000107.html	T000107	Voronoi hücreleri	Voronoi hücreleri
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000108.html	T000108	Sıralı dithering (Bayer)	Dithering / halftone
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000109.html	T000109	ASCII dönüştürücü	ASCII dönüştürücü
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T000176.html	T000176	Kaydırınca açılan yayın programı	CSS kaydırma güdümlü animasyon
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T005042.html	T005042	Sahne sesi spektrumu	WebAudio spektrum
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T015328.html	T015328	Sponsor bandı: dönen gradyan çerçeve	@property ile animasyonlu gradyan
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T025071.html	T025071	Sıvı kumaş filtresi	SVG filtre: sıvı kumaş
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T025499.html	T025499	Hilbert eğrisiyle kapı yerleşimi	Hilbert eğrisi yerleşimi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T030252.html	T030252	Akış alanı şeritleri	Gürültü akış alanı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T030401.html	T030401	Kapı aralığından kıvılcımlar	Canvas 2D parçacık sistemi
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T035025.html	T035025	Podyum karuseli	CSS 3B dönme (podyum/karusel)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T040113.html	T040113	50.000 kapı bulutu	GPU noktaları (50.000)
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T040204.html	T040204	Verlet kumaş	Verlet kumaş simülasyonu
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T040361.html	T040361	Alan çarpıtma gölgelendiricisi	WebGL2 parça gölgelendirici
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T045148.html	T045148	50.000 kapı tek bellek bloğunda	Tek bellek bloğunda 50.000 kapı
+https://ertan-design.github.io/selinahbap-afair-vitrin/sahne/T045485.html	T045485	Yaylanan sonuç panosu	WAAPI + linear() yay eğrisi

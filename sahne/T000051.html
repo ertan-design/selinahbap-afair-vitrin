@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Canvas 2D parçacık sistemi · Canvas 2D parçacık sistemi · T000051</title>
+<meta name="description" content="Yarı saydam zemin üstünde iz bırakan parçacıklar; imleç onları çeker. Örnek nokta.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000051</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Canvas 2D parçacık sistemi"></div>
+  <h1>Canvas 2D parçacık sistemi</h1>
+  <p class="ac">Yarı saydam zemin üstünde iz bırakan parçacıklar; imleç onları çeker. Örnek nokta.</p>
+  <ul class="etk"><li class="t">Canvas 2D parçacık sistemi</li><li>Tasarımcı duvarı</li><li>Standart</li><li><span class="renkler"><i style="background:#07080f"></i><i style="background:#3df2ff"></i><i style="background:#ff3d9a"></i><i style="background:#7a5cff"></i></span>Şehir neonu</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>register({
+  baslik: 'Canvas 2D parçacık sistemi',
+  aciklama: 'Yarı saydam zemin üstünde iz bırakan parçacıklar; imleç onları çeker. Örnek nokta.',
+  mount: function (host, api) {
+    var P = api.palette;
+    var c = document.createElement('canvas');
+    c.style.cssText = 'display:block;width:100%;height:100%;touch-action:none';
+    host.appendChild(c);
+    var x = c.getContext('2d');
+    var w = 1, h = 1, dpr = 1;
+    var mx = -9999, my = -9999, pulling = false;
+    var N = 160, ps = [];
+    var R = api.rng ? api.rng(51) : Math.random;
+    if (typeof R !== 'function') R = Math.random;
+
+    for (var i = 0; i &lt; N; i++) {
+      ps.push({ x: R() * 400, y: R() * 300, vx: 0, vy: 0, k: i % 3 });
+    }
+
+    function seed() {
+      for (var i = 0; i &lt; N; i++) {
+        ps[i].x = R() * w; ps[i].y = R() * h; ps[i].vx = 0; ps[i].vy = 0;
+      }
+    }
+
+    function fit() {
+      w = Math.max(1, host.clientWidth || api.width);
+      h = Math.max(1, host.clientHeight || api.height);
+      dpr = api.dpr || 1;
+      c.width = Math.max(2, Math.round(w * dpr));
+      c.height = Math.max(2, Math.round(h * dpr));
+      x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      x.fillStyle = P.bg; x.fillRect(0, 0, w, h);
+      seed();
+    }
+
+    function update() {
+      x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      x.globalAlpha = 0.12;
+      x.fillStyle = P.bg;
+      x.fillRect(0, 0, w, h);
+      x.globalAlpha = 1;
+      var cols = [P.a, P.b, P.c];
+      for (var i = 0; i &lt; N; i++) {
+        var p = ps[i];
+        if (pulling) {
+          var dx = mx - p.x, dy = my - p.y, d = Math.sqrt(dx * dx + dy * dy) + 1;
+          p.vx += dx / d * 0.6; p.vy += dy / d * 0.6;
+        } else {
+          p.vx += (R() - 0.5) * 0.2;
+          p.vy += (R() - 0.5) * 0.2;
+        }
+        p.vx *= 0.96; p.vy *= 0.96;
+        p.x += p.vx; p.y += p.vy;
+        if (p.x &lt; 0) { p.x = 0; p.vx *= -1; }
+        if (p.x &gt; w) { p.x = w; p.vx *= -1; }
+        if (p.y &lt; 0) { p.y = 0; p.vy *= -1; }
+        if (p.y &gt; h) { p.y = h; p.vy *= -1; }
+        x.fillStyle = cols[p.k];
+        x.beginPath();
+        x.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+        x.fill();
+      }
+    }
+
+    function setPos(e) {
+      var r = c.getBoundingClientRect();
+      mx = e.clientX - r.left; my = e.clientY - r.top;
+    }
+    api.on(c, 'pointermove', function (e) { setPos(e); pulling = true; });
+    api.on(c, 'pointerdown', function (e) { setPos(e); pulling = true; });
+    api.on(c, 'pointerleave', function () { pulling = false; });
+
+    api.onResize(fit);
+    fit();
+    var stop = api.reducedMotion ? null : api.raf(update);
+    if (api.reducedMotion) update();
+    return function () { if (typeof stop === 'function') stop(); c.remove(); };
+  }
+});
+</pre></details>
+  <p class="alt">T000051 · alt-15 · 2719 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"register({\n  baslik: 'Canvas 2D parçacık sistemi',\n  aciklama: 'Yarı saydam zemin üstünde iz bırakan parçacıklar; imleç onları çeker. Örnek nokta.',\n  mount: function (host, api) {\n    var P = api.palette;\n    var c = document.createElement('canvas');\n    c.style.cssText = 'display:block;width:100%;height:100%;touch-action:none';\n    host.appendChild(c);\n    var x = c.getContext('2d');\n    var w = 1, h = 1, dpr = 1;\n    var mx = -9999, my = -9999, pulling = false;\n    var N = 160, ps = [];\n    var R = api.rng ? api.rng(51) : Math.random;\n    if (typeof R !== 'function') R = Math.random;\n\n    for (var i = 0; i < N; i++) {\n      ps.push({ x: R() * 400, y: R() * 300, vx: 0, vy: 0, k: i % 3 });\n    }\n\n    function seed() {\n      for (var i = 0; i < N; i++) {\n        ps[i].x = R() * w; ps[i].y = R() * h; ps[i].vx = 0; ps[i].vy = 0;\n      }\n    }\n\n    function fit() {\n      w = Math.max(1, host.clientWidth || api.width);\n      h = Math.max(1, host.clientHeight || api.height);\n      dpr = api.dpr || 1;\n      c.width = Math.max(2, Math.round(w * dpr));\n      c.height = Math.max(2, Math.round(h * dpr));\n      x.setTransform(dpr, 0, 0, dpr, 0, 0);\n      x.fillStyle = P.bg; x.fillRect(0, 0, w, h);\n      seed();\n    }\n\n    function update() {\n      x.setTransform(dpr, 0, 0, dpr, 0, 0);\n      x.globalAlpha = 0.12;\n      x.fillStyle = P.bg;\n      x.fillRect(0, 0, w, h);\n      x.globalAlpha = 1;\n      var cols = [P.a, P.b, P.c];\n      for (var i = 0; i < N; i++) {\n        var p = ps[i];\n        if (pulling) {\n          var dx = mx - p.x, dy = my - p.y, d = Math.sqrt(dx * dx + dy * dy) + 1;\n          p.vx += dx / d * 0.6; p.vy += dy / d * 0.6;\n        } else {\n          p.vx += (R() - 0.5) * 0.2;\n          p.vy += (R() - 0.5) * 0.2;\n        }\n        p.vx *= 0.96; p.vy *= 0.96;\n        p.x += p.vx; p.y += p.vy;\n        if (p.x < 0) { p.x = 0; p.vx *= -1; }\n        if (p.x > w) { p.x = w; p.vx *= -1; }\n        if (p.y < 0) { p.y = 0; p.vy *= -1; }\n        if (p.y > h) { p.y = h; p.vy *= -1; }\n        x.fillStyle = cols[p.k];\n        x.beginPath();\n        x.arc(p.x, p.y, 2.2, 0, Math.PI * 2);\n        x.fill();\n      }\n    }\n\n    function setPos(e) {\n      var r = c.getBoundingClientRect();\n      mx = e.clientX - r.left; my = e.clientY - r.top;\n    }\n    api.on(c, 'pointermove', function (e) { setPos(e); pulling = true; });\n    api.on(c, 'pointerdown', function (e) { setPos(e); pulling = true; });\n    api.on(c, 'pointerleave', function () { pulling = false; });\n\n    api.onResize(fit);\n    fit();\n    var stop = api.reducedMotion ? null : api.raf(update);\n    if (api.reducedMotion) update();\n    return function () { if (typeof stop === 'function') stop(); c.remove(); };\n  }\n});\n","ayar":{"palet":{"bg":"#07080f","fg":"#e9f1ff","a":"#3df2ff","b":"#ff3d9a","c":"#7a5cff"},"rm":false,"seed":51,"id":"T000051"},"baslik":"Canvas 2D parçacık sistemi","t":"canvas2d-parcacik"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

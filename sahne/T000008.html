@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Podyumda Bayer ışığı · Dithering / halftone · T000008</title>
+<meta name="description" content="Defile podyumu: Bayer 8×8 eşik matrisiyle iki tonlu (dithering/halftone) çizilmiş ışık huzmeleri, kumaş perde ve soyut figürler. Örnek sahne; gerçek kişi ya da marka yok.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000008</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Podyumda Bayer ışığı"></div>
+  <h1>Podyumda Bayer ışığı</h1>
+  <p class="ac">Defile podyumu: Bayer 8×8 eşik matrisiyle iki tonlu (dithering/halftone) çizilmiş ışık huzmeleri, kumaş perde ve soyut figürler. Örnek sahne; gerçek kişi ya da marka yok.</p>
+  <ul class="etk"><li class="t">Dithering / halftone</li><li>Defile podyumu</li><li>Standart</li><li><span class="renkler"><i style="background:#0b0a10"></i><i style="background:#e8c26a"></i><i style="background:#b0763c"></i><i style="background:#5c3b1e"></i></span>Gece altını</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>/* Defile podyumu: Bayer 8x8 eşik matrisiyle sıralı dithering. Örnek sahne; gerçek veri yok. */
+register({
+  baslik: 'Podyumda Bayer ışığı',
+  aciklama: 'Defile podyumu: Bayer 8×8 eşik matrisiyle iki tonlu (dithering/halftone) çizilmiş ışık huzmeleri, kumaş perde ve soyut figürler. Örnek sahne; gerçek kişi ya da marka yok.',
+  mount: function (host, api) {
+    var P = api.palette, M = Math, S = M.sin, Ab = M.abs, Mn = M.min, Mx = M.max, YH = .4;
+    var c = document.createElement('canvas'), x = c.getContext('2d'), cap = document.createElement('div');
+    var bw = 2, bh = 2, asp = 1, im, L, kirli = 1, K = [], B = [0], i, n, N, X, Y;
+    /* renk merdiveni: koyudan açığa, yalnız api.palette */
+    [P.bg, P.c, P.b, P.a, P.fg].forEach(function (h) {
+      h = h.replace('#', ''); if (h.length &lt; 6) h = h.replace(/./g, '$&amp;$&amp;');
+      var v = parseInt(h, 16); K.push(v &gt;&gt; 16 &amp; 255, v &gt;&gt; 8 &amp; 255, v &amp; 255);
+    });
+    /* Bayer eşik matrisi: M(2n) = [[4M, 4M+2], [4M+3, 4M+1]]; 1x1'den 8x8'e */
+    for (n = 1; n &lt; 8; n *= 2) {
+      for (N = [], i = 0; i &lt; 4 * n * n; i++) {
+        X = i % (2 * n); Y = (i / (2 * n)) | 0;
+        N.push(4 * B[(Y % n) * n + X % n] + [0, 2, 3, 1][(Y &gt;= n ? 2 : 0) + (X &gt;= n ? 1 : 0)]);
+      }
+      B = N;
+    }
+    for (i = 0; i &lt; 64; i++) B[i] = (B[i] + .5) / 64;
+    cap.textContent = 'ÖRNEK SAHNE · Bayer 8×8 eşik · dithering';
+    c.setAttribute('aria-label', cap.textContent);
+    c.style.cssText = 'display:block;width:100%;height:100%;image-rendering:pixelated';
+    cap.style.cssText = 'position:absolute;left:8px;bottom:6px;padding:2px 6px;font:600 10px/1.3 system-ui,sans-serif;opacity:.85;pointer-events:none;color:' + P.fg + ';background:' + P.bg;
+    host.appendChild(c); host.appendChild(cap);
+    function fit() {
+      var s = Mx(2, M.ceil(api.width / 280));
+      bw = Mx(16, M.ceil(api.width / s)); bh = Mx(16, M.ceil(api.height / s)); asp = bw / bh;
+      c.width = bw; c.height = bh; im = x.createImageData(bw, bh); L = new Float32Array(bw * bh); kirli = 1;
+    }
+    /* soyut figür: uzun kumaş etek, gövde, baş; p = yürüyüş ilerlemesi (0..1); altta yansıması */
+    function figur(p, t) {
+      var df = 1 / (14 - 11.8 * p), h = 1.5 * df * bh, fx = bw / 2 + .1 * df * S(p * 22) * bh, fy = (YH + df) * bh;
+      var al = Mn(1, p * 12, (1 - p) * 12), py, px, q, w, dx, hd, lf, ix, ys;
+      for (py = Mx(0, fy - h) | 0; py &lt; Mn(bh, fy + h * .7); py++) {
+        ys = py + .5 &gt; fy; q = Ab(fy - py - .5) / h; if (q &gt; 1) continue;
+        w = q &lt; .6 ? .045 + .2 * M.pow(1 - q / .6, 1.4) + .03 * S(q * 16 - t * .004 + p * 20) * (1 - q / .6) : q &lt; .78 ? .045 + (q - .6) * .17 : q &lt; .86 ? .075 - (q - .78) * .7 : 0;
+        for (px = Mx(0, fx - .3 * h) | 0; px &lt; Mn(bw, fx + .3 * h); px++) {
+          dx = (px + .5 - fx) / h; hd = (q - .91) * (q - .91) / .0056 + dx * dx / .0027;
+          if (Ab(dx) &gt;= w &amp;&amp; hd &gt;= 1) continue;
+          lf = (hd &lt; 1 ? hd &gt; .65 : (w - Ab(dx)) * h &lt; 1.6) ? .95 : .1 + .28 * (.5 + .5 * S(dx * 60 + q * 5 + p * 40));
+          ix = py * bw + px; L[ix] += (lf - L[ix]) * al * (ys ? .3 * (1 - q) : 1);
+        }
+      }
+    }
+    function kare() {
+      if (api.reducedMotion &amp;&amp; !kirli) return;
+      kirli = 0;
+      var t = api.reducedMotion ? 3300 : api.time(), sn = [], cs = [], ox = [-.39 * asp, 0, .39 * asp], d = im.data, p0 = (t / 11000) % 1, p1 = (p0 + .5) % 1;
+      var k, a, y, xx, v, dd, z, e, lamp = 0, warp, vf, u, au, l, pu, al, w, o = 0;
+      for (k = 0; k &lt; 3; k++) { a = .3 * S(t * (.0004 + .00012 * k) + k * 2.1) - ox[k] * .45; sn[k] = S(a); cs[k] = M.cos(a); }
+      for (y = 0; y &lt; bh; y++) {
+        v = (y + .5) / bh; dd = v - YH; warp = 2.2 * S(v * 7 + t * .0007) + t * .0004; vf = .55 + .9 * v;
+        if (dd &gt;= .04) {
+          z = 1 / dd; e = .9 * dd; a = z * .8; i = a | 0;
+          lamp = a - i &lt; .13 ? (.5 + .5 * S(t * .004 - i * .9)) * Mn(1, dd * 5) : 0;
+        }
+        for (xx = 0; xx &lt; bw; xx++) {
+          u = (xx + .5 - bw / 2) / bh; au = Ab(u);
+          if (dd &lt; .04) { /* arka duvar: dalgalanan kumaş perde ve ışıklı kapı */
+            l = vf * (.36 + .22 * S(u * 34 + warp)) + .3 / (1 + 30 * (u * u + (v - .3) * (v - .3)));
+            if (v &gt; .16 &amp;&amp; au &lt; .13) l = au &gt; .115 ? .8 : .95 - (.44 - v) * 1.1;
+          } else if (au &lt; e) { /* podyum: parlak zemin, ışık şeritleri, kenar ışıkları */
+            l = .12 + .5 / (1 + 70 * u * u / (dd + .08)) + lamp * .55;
+            if (e - au &lt; .008 + .02 * dd) l = 1;
+          } else l = .04 + .16 / (1 + 14 * (au - e)); /* seyirci alanı */
+          for (k = 0; k &lt; 3; k++) { /* tavan spotları */
+            pu = u - ox[k]; al = pu * sn[k] + v * cs[k];
+            if (al &gt; 0) { z = pu * cs[k] - v * sn[k]; w = .02 + .09 * al; l += .55 / ((1 + 3 * z * z / (w * w)) * (1 + al)); }
+          }
+          L[o++] = l;
+        }
+      }
+      if (p0 &lt; p1) { figur(p0, t); figur(p1, t); } else { figur(p1, t); figur(p0, t); }
+      for (i = 0; i &lt; 14; i++) { /* seyirci flaşları */
+        a = (t / (900 + i * 130) + i * .37) % 1; if (a &gt; .07) continue;
+        k = ((.5 + (i * .382 % 1) * .45) * bh | 0) * bw + (((i % 2 ? .8 : .02) + (i * .618 % 1) * .18) * bw | 0); a = 1 - a / .07;
+        L[k] += a; L[k - 1] += a * .6; L[k + 1] += a * .6; L[k - bw] += a * .6; L[k + bw] += a * .6;
+      }
+      /* sıralı dithering: piksel, Bayer eşiğine göre merdivenin iki komşu tonundan birini alır */
+      for (y = 0, o = 0, k = 0; y &lt; bh; y++) for (xx = 0; xx &lt; bw; xx++, k++, o += 4) {
+        l = Mn(1, Mx(0, L[k])) * 4; a = l | 0;
+        z = (a + (l - a &gt; B[(y &amp; 7) * 8 + (xx &amp; 7)] ? 1 : 0)) * 3;
+        d[o] = K[z]; d[o + 1] = K[z + 1]; d[o + 2] = K[z + 2]; d[o + 3] = 255;
+      }
+      x.putImageData(im, 0, 0);
+    }
+    fit(); api.onResize(fit);
+    var dur = api.raf(kare);
+    return function () { dur(); c.remove(); cap.remove(); };
+  }
+});
+</pre></details>
+  <p class="alt">T000008 · alt-08 · 5888 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"/* Defile podyumu: Bayer 8x8 eşik matrisiyle sıralı dithering. Örnek sahne; gerçek veri yok. */\nregister({\n  baslik: 'Podyumda Bayer ışığı',\n  aciklama: 'Defile podyumu: Bayer 8×8 eşik matrisiyle iki tonlu (dithering/halftone) çizilmiş ışık huzmeleri, kumaş perde ve soyut figürler. Örnek sahne; gerçek kişi ya da marka yok.',\n  mount: function (host, api) {\n    var P = api.palette, M = Math, S = M.sin, Ab = M.abs, Mn = M.min, Mx = M.max, YH = .4;\n    var c = document.createElement('canvas'), x = c.getContext('2d'), cap = document.createElement('div');\n    var bw = 2, bh = 2, asp = 1, im, L, kirli = 1, K = [], B = [0], i, n, N, X, Y;\n    /* renk merdiveni: koyudan açığa, yalnız api.palette */\n    [P.bg, P.c, P.b, P.a, P.fg].forEach(function (h) {\n      h = h.replace('#', ''); if (h.length < 6) h = h.replace(/./g, '$&$&');\n      var v = parseInt(h, 16); K.push(v >> 16 & 255, v >> 8 & 255, v & 255);\n    });\n    /* Bayer eşik matrisi: M(2n) = [[4M, 4M+2], [4M+3, 4M+1]]; 1x1'den 8x8'e */\n    for (n = 1; n < 8; n *= 2) {\n      for (N = [], i = 0; i < 4 * n * n; i++) {\n        X = i % (2 * n); Y = (i / (2 * n)) | 0;\n        N.push(4 * B[(Y % n) * n + X % n] + [0, 2, 3, 1][(Y >= n ? 2 : 0) + (X >= n ? 1 : 0)]);\n      }\n      B = N;\n    }\n    for (i = 0; i < 64; i++) B[i] = (B[i] + .5) / 64;\n    cap.textContent = 'ÖRNEK SAHNE · Bayer 8×8 eşik · dithering';\n    c.setAttribute('aria-label', cap.textContent);\n    c.style.cssText = 'display:block;width:100%;height:100%;image-rendering:pixelated';\n    cap.style.cssText = 'position:absolute;left:8px;bottom:6px;padding:2px 6px;font:600 10px/1.3 system-ui,sans-serif;opacity:.85;pointer-events:none;color:' + P.fg + ';background:' + P.bg;\n    host.appendChild(c); host.appendChild(cap);\n    function fit() {\n      var s = Mx(2, M.ceil(api.width / 280));\n      bw = Mx(16, M.ceil(api.width / s)); bh = Mx(16, M.ceil(api.height / s)); asp = bw / bh;\n      c.width = bw; c.height = bh; im = x.createImageData(bw, bh); L = new Float32Array(bw * bh); kirli = 1;\n    }\n    /* soyut figür: uzun kumaş etek, gövde, baş; p = yürüyüş ilerlemesi (0..1); altta yansıması */\n    function figur(p, t) {\n      var df = 1 / (14 - 11.8 * p), h = 1.5 * df * bh, fx = bw / 2 + .1 * df * S(p * 22) * bh, fy = (YH + df) * bh;\n      var al = Mn(1, p * 12, (1 - p) * 12), py, px, q, w, dx, hd, lf, ix, ys;\n      for (py = Mx(0, fy - h) | 0; py < Mn(bh, fy + h * .7); py++) {\n        ys = py + .5 > fy; q = Ab(fy - py - .5) / h; if (q > 1) continue;\n        w = q < .6 ? .045 + .2 * M.pow(1 - q / .6, 1.4) + .03 * S(q * 16 - t * .004 + p * 20) * (1 - q / .6) : q < .78 ? .045 + (q - .6) * .17 : q < .86 ? .075 - (q - .78) * .7 : 0;\n        for (px = Mx(0, fx - .3 * h) | 0; px < Mn(bw, fx + .3 * h); px++) {\n          dx = (px + .5 - fx) / h; hd = (q - .91) * (q - .91) / .0056 + dx * dx / .0027;\n          if (Ab(dx) >= w && hd >= 1) continue;\n          lf = (hd < 1 ? hd > .65 : (w - Ab(dx)) * h < 1.6) ? .95 : .1 + .28 * (.5 + .5 * S(dx * 60 + q * 5 + p * 40));\n          ix = py * bw + px; L[ix] += (lf - L[ix]) * al * (ys ? .3 * (1 - q) : 1);\n        }\n      }\n    }\n    function kare() {\n      if (api.reducedMotion && !kirli) return;\n      kirli = 0;\n      var t = api.reducedMotion ? 3300 : api.time(), sn = [], cs = [], ox = [-.39 * asp, 0, .39 * asp], d = im.data, p0 = (t / 11000) % 1, p1 = (p0 + .5) % 1;\n      var k, a, y, xx, v, dd, z, e, lamp = 0, warp, vf, u, au, l, pu, al, w, o = 0;\n      for (k = 0; k < 3; k++) { a = .3 * S(t * (.0004 + .00012 * k) + k * 2.1) - ox[k] * .45; sn[k] = S(a); cs[k] = M.cos(a); }\n      for (y = 0; y < bh; y++) {\n        v = (y + .5) / bh; dd = v - YH; warp = 2.2 * S(v * 7 + t * .0007) + t * .0004; vf = .55 + .9 * v;\n        if (dd >= .04) {\n          z = 1 / dd; e = .9 * dd; a = z * .8; i = a | 0;\n          lamp = a - i < .13 ? (.5 + .5 * S(t * .004 - i * .9)) * Mn(1, dd * 5) : 0;\n        }\n        for (xx = 0; xx < bw; xx++) {\n          u = (xx + .5 - bw / 2) / bh; au = Ab(u);\n          if (dd < .04) { /* arka duvar: dalgalanan kumaş perde ve ışıklı kapı */\n            l = vf * (.36 + .22 * S(u * 34 + warp)) + .3 / (1 + 30 * (u * u + (v - .3) * (v - .3)));\n            if (v > .16 && au < .13) l = au > .115 ? .8 : .95 - (.44 - v) * 1.1;\n          } else if (au < e) { /* podyum: parlak zemin, ışık şeritleri, kenar ışıkları */\n            l = .12 + .5 / (1 + 70 * u * u / (dd + .08)) + lamp * .55;\n            if (e - au < .008 + .02 * dd) l = 1;\n          } else l = .04 + .16 / (1 + 14 * (au - e)); /* seyirci alanı */\n          for (k = 0; k < 3; k++) { /* tavan spotları */\n            pu = u - ox[k]; al = pu * sn[k] + v * cs[k];\n            if (al > 0) { z = pu * cs[k] - v * sn[k]; w = .02 + .09 * al; l += .55 / ((1 + 3 * z * z / (w * w)) * (1 + al)); }\n          }\n          L[o++] = l;\n        }\n      }\n      if (p0 < p1) { figur(p0, t); figur(p1, t); } else { figur(p1, t); figur(p0, t); }\n      for (i = 0; i < 14; i++) { /* seyirci flaşları */\n        a = (t / (900 + i * 130) + i * .37) % 1; if (a > .07) continue;\n        k = ((.5 + (i * .382 % 1) * .45) * bh | 0) * bw + (((i % 2 ? .8 : .02) + (i * .618 % 1) * .18) * bw | 0); a = 1 - a / .07;\n        L[k] += a; L[k - 1] += a * .6; L[k + 1] += a * .6; L[k - bw] += a * .6; L[k + bw] += a * .6;\n      }\n      /* sıralı dithering: piksel, Bayer eşiğine göre merdivenin iki komşu tonundan birini alır */\n      for (y = 0, o = 0, k = 0; y < bh; y++) for (xx = 0; xx < bw; xx++, k++, o += 4) {\n        l = Mn(1, Mx(0, L[k])) * 4; a = l | 0;\n        z = (a + (l - a > B[(y & 7) * 8 + (xx & 7)] ? 1 : 0)) * 3;\n        d[o] = K[z]; d[o + 1] = K[z + 1]; d[o + 2] = K[z + 2]; d[o + 3] = 255;\n      }\n      x.putImageData(im, 0, 0);\n    }\n    fit(); api.onResize(fit);\n    var dur = api.raf(kare);\n    return function () { dur(); c.remove(); cap.remove(); };\n  }\n});\n","ayar":{"palet":{"bg":"#0b0a10","fg":"#f3ede2","a":"#e8c26a","b":"#b0763c","c":"#5c3b1e"},"rm":false,"seed":8,"id":"T000008"},"baslik":"Podyumda Bayer ışığı","t":"canvas2d-dithering"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

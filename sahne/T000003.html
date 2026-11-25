@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Podyumda boids sürüsü · Boids sürü davranışı · T000003</title>
+<meta name="description" content="Ayrılma, hizalanma ve bağlanma kurallı örnek kumaş sürüsü; podyumda ışığı izler ya da ondan kaçar.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000003</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Podyumda boids sürüsü"></div>
+  <h1>Podyumda boids sürüsü</h1>
+  <p class="ac">Ayrılma, hizalanma ve bağlanma kurallı örnek kumaş sürüsü; podyumda ışığı izler ya da ondan kaçar.</p>
+  <ul class="etk"><li class="t">Boids sürü davranışı</li><li>Defile podyumu</li><li>Standart</li><li><span class="renkler"><i style="background:#0b0a10"></i><i style="background:#e8c26a"></i><i style="background:#b0763c"></i><i style="background:#5c3b1e"></i></span>Gece altını</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>/* canvas2d-surusu-boids: ayrılma, hizalanma, bağlanma kurallı boids sürüsü */
+register({
+	baslik: 'Podyumda boids sürüsü',
+	aciklama: 'Ayrılma, hizalanma ve bağlanma kurallı örnek kumaş sürüsü; podyumda ışığı izler ya da ondan kaçar.',
+	mount: function (host, api) {
+		var P = api.palette, rnd = api.rng(7), PI2 = Math.PI*2, sin = Math.sin, sqrt = Math.sqrt;
+		var c = document.createElement('canvas'), x = c.getContext('2d'), col = [P.a, P.a, P.b, P.fg];
+		var W, H, u, B = [], N, tx, ty, inside = 0, mode = 1, flipT = 0, last = api.time(), i;
+		c.style.cssText = 'display:block;width:100%;height:100%;touch-action:none';
+		host.appendChild(c);
+		function fit() {
+			u = Math.max(.6, Math.min(api.width/640, api.height/360));
+			W = api.width/u; H = api.height/u;
+			c.width = api.width*api.dpr|0; c.height = api.height*api.dpr|0;
+		}
+		fit(); api.onResize(fit);
+		tx = W/2; ty = H*.62; N = Math.max(60, Math.min(200, W*H/2300|0));
+		for (i = 0; i &lt; N; i++) B.push({ x: W*(.1 + .8*rnd()), y: H*(.25 + .65*rnd()), vx: rnd()*180 - 90, vy: rnd()*180 - 90, k: rnd()*4|0, s: .6 + .4*rnd() });
+		function ex(s, r) { return W*(r ? .7 + .28*s : .3 - .28*s); }
+		function wall(v, lo, hi) { return v &lt; lo ? lo - v : v &gt; hi ? hi - v : 0; }
+		function poly(p) { x.beginPath(); x.moveTo(p[0], p[1]); for (var j = 2; j &lt; p.length; j += 2) x.lineTo(p[j], p[j+1]); x.fill(); }
+		function step(dt, w) {
+			var i, j, b, o, dx, dy, d, n, sx, sy, ax, ay, cx, cy, fx, fy, f, s;
+			for (i = 0; i &lt; N; i++) {
+				b = B[i]; n = sx = sy = ax = ay = cx = cy = 0;
+				for (j = 0; j &lt; N; j++) {
+					o = B[j]; dx = o.x - b.x; dy = o.y - b.y; d = dx*dx + dy*dy;
+					if (j !== i &amp;&amp; d &lt; 5184) {
+						n++; ax += o.vx; ay += o.vy; cx += o.x; cy += o.y;
+						if (d &lt; 576) { d = sqrt(d) + .01; f = (24 - d)/(24*d); sx -= dx*f; sy -= dy*f; } // ayrılma
+					}
+				}
+				f = 520*w[0]; fx = sx*f; fy = sy*f;
+				if (n) { // hizalanma + bağlanma
+					fx += (ax/n - b.vx)*2.2*w[1] + (cx/n - b.x)*.9*w[2];
+					fy += (ay/n - b.vy)*2.2*w[1] + (cy/n - b.y)*.9*w[2];
+				}
+				dx = tx - b.x; dy = ty - b.y; d = sqrt(dx*dx + dy*dy) + .01;
+				if (mode &gt; 0) { fx += dx*.5; fy += dy*.5; } // ışığı izle
+				else if (d &lt; 190) { f = (1 - d/190)*1100/d; fx -= dx*f; fy -= dy*f; } // ışıktan kaç
+				fx += wall(b.x, 36, W - 36)*6;
+				fy += wall(b.y, H*.2, H*.9)*6 + (H*.62 - b.y)*.3;
+				b.vx += fx*dt; b.vy += fy*dt;
+				s = sqrt(b.vx*b.vx + b.vy*b.vy) + .01; f = s &gt; 135 ? 135/s : s &lt; 55 ? 55/s : 1;
+				b.vx *= f; b.vy *= f; b.x += b.vx*dt; b.y += b.vy*dt;
+			}
+		}
+		function lamp(s0, e0, ey, r, al, cl) {
+			var g = x.createLinearGradient(0, 0, 0, ey);
+			g.addColorStop(0, cl); g.addColorStop(1, P.bg);
+			x.globalAlpha = al; x.fillStyle = g; poly([s0 - 4, 0, s0 + 4, 0, e0 + r, ey, e0 - r, ey]);
+			x.fillStyle = cl; x.globalAlpha = al*.8; x.beginPath(); x.ellipse(e0, ey, r*1.1, r*.3, 0, 0, PI2); x.fill();
+		}
+		function draw(T, w) {
+			var yF = H*.44, yN = H*.92, v = Math.max(13, 10/u), nm = ['ayrılma', 'hizalanma', 'bağlanma'], cc = [P.b, P.a, P.fg], i, k, s, g, b, y;
+			x.setTransform(api.dpr*u, 0, 0, api.dpr*u, 0, 0); x.setLineDash([]); x.globalAlpha = 1;
+			g = x.createRadialGradient(W/2, yF, 0, W/2, yF, W*.7); g.addColorStop(0, P.c); g.addColorStop(1, P.bg);
+			x.fillStyle = g; x.fillRect(0, 0, W, H);
+			g = x.createLinearGradient(0, yF, 0, yN); g.addColorStop(0, P.bg); g.addColorStop(1, P.c);
+			x.fillStyle = g; poly([ex(0, 0), yF, ex(0, 1), yF, ex(1, 1), yN, ex(1, 0), yN]);
+			x.strokeStyle = P.b; x.lineWidth = 1; x.globalAlpha = .35; x.beginPath();
+			for (k = 1; k &lt; 9; k++) { s = k*k/81; y = yF + (yN - yF)*s; x.moveTo(ex(s, 0), y); x.lineTo(ex(s, 1), y); }
+			x.stroke();
+			x.strokeStyle = P.a; x.lineWidth = 3; x.lineCap = 'round'; x.globalAlpha = .9;
+			x.setLineDash([.1, 14]); x.lineDashOffset = api.reducedMotion ? 0 : -T/25;
+			x.beginPath(); x.moveTo(ex(0, 0), yF); x.lineTo(ex(1, 0), yN); x.moveTo(ex(0, 1), yF); x.lineTo(ex(1, 1), yN); x.stroke();
+			x.globalCompositeOperation = 'lighter';
+			for (k = 0; k &lt; 4; k++) { s = W*(.14 + .24*k); lamp(s, s + sin(T/1800 + k*1.9)*W*.12, yF + (yN - yF)*.55, 46, .2, P.a); }
+			lamp(W/2 + (tx - W/2)*.3, tx, ty, 62, .28, P.fg);
+			for (i = 0; i &lt; N; i++) {
+				b = B[i]; s = b.s*(.8 + 1.2*Math.min(1, Math.max(0, (b.y - yF)/(yN - yF))));
+				x.save(); x.translate(b.x, b.y); x.rotate(Math.atan2(b.vy, b.vx)); x.scale(s, s);
+				x.fillStyle = col[b.k]; k = 3 + 2*sin(T/140 + i);
+				x.globalAlpha = .2; poly([-14, 0, -56, -k, -56, k]);
+				x.globalAlpha = .9; poly([10, 0, -14, -4, -14, 4]);
+				x.restore();
+			}
+			x.globalCompositeOperation = 'source-over'; x.globalAlpha = .85; x.strokeStyle = P.fg; x.lineWidth = 1.5;
+			x.setLineDash(mode &gt; 0 ? [] : [4, 4]);
+			x.beginPath(); x.arc(tx, ty, 12 + 2*sin(T/200), 0, PI2); x.stroke();
+			x.font = v + 'px sans-serif'; x.globalAlpha = .95; x.fillStyle = P.fg;
+			x.fillText('Defile podyumu · boids (örnek sahne)', 12, v + 5);
+			x.fillStyle = P.a; x.fillText(mode &gt; 0 ? 'Sürü ışığı izliyor · tıkla: kaçsın' : 'Sürü ışıktan kaçıyor · tıkla: izlesin', 12, 2*v + 9);
+			for (i = 0; i &lt; 3; i++) {
+				y = H - 12 - (2 - i)*(v + 8);
+				x.fillStyle = P.fg; x.fillText(nm[i], 12, y);
+				x.fillStyle = cc[i]; x.fillRect(12, y + 3, 90*(w[i] - .55)/.9 + 4, 3);
+			}
+		}
+		function frame() {
+			var T = api.time(), dt = Math.min(.05, (T - last)/1000)*(api.reducedMotion ? .35 : 1);
+			var w = [0, 1, 2].map(function (k) { return 1 + .45*sin(T/(2900 - 600*k) + 2*k); });
+			last = T;
+			if (!inside) {
+				tx = W*(.5 + .36*sin(T/3100)); ty = H*.62 + sin(T/1300)*H*.07;
+				if (T - flipT &gt; 9000) { mode = -mode; flipT = T; }
+			}
+			step(dt, w); draw(T, w);
+		}
+		function pt(e) { var r = c.getBoundingClientRect(); tx = (e.clientX - r.left)/u; ty = (e.clientY - r.top)/u; inside = 1; }
+		api.on(host, 'pointermove', pt);
+		api.on(host, 'pointerleave', function () { inside = 0; });
+		api.on(host, 'pointerdown', function (e) { pt(e); mode = -mode; flipT = api.time(); });
+		for (i = 0; i &lt; 90; i++) step(1/60, [1, 1, 1]);
+		var dur = api.raf(frame);
+		return function () { dur(); };
+	}
+});
+</pre></details>
+  <p class="alt">T000003 · alt-02 · 6126 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"/* canvas2d-surusu-boids: ayrılma, hizalanma, bağlanma kurallı boids sürüsü */\nregister({\n\tbaslik: 'Podyumda boids sürüsü',\n\taciklama: 'Ayrılma, hizalanma ve bağlanma kurallı örnek kumaş sürüsü; podyumda ışığı izler ya da ondan kaçar.',\n\tmount: function (host, api) {\n\t\tvar P = api.palette, rnd = api.rng(7), PI2 = Math.PI*2, sin = Math.sin, sqrt = Math.sqrt;\n\t\tvar c = document.createElement('canvas'), x = c.getContext('2d'), col = [P.a, P.a, P.b, P.fg];\n\t\tvar W, H, u, B = [], N, tx, ty, inside = 0, mode = 1, flipT = 0, last = api.time(), i;\n\t\tc.style.cssText = 'display:block;width:100%;height:100%;touch-action:none';\n\t\thost.appendChild(c);\n\t\tfunction fit() {\n\t\t\tu = Math.max(.6, Math.min(api.width/640, api.height/360));\n\t\t\tW = api.width/u; H = api.height/u;\n\t\t\tc.width = api.width*api.dpr|0; c.height = api.height*api.dpr|0;\n\t\t}\n\t\tfit(); api.onResize(fit);\n\t\ttx = W/2; ty = H*.62; N = Math.max(60, Math.min(200, W*H/2300|0));\n\t\tfor (i = 0; i < N; i++) B.push({ x: W*(.1 + .8*rnd()), y: H*(.25 + .65*rnd()), vx: rnd()*180 - 90, vy: rnd()*180 - 90, k: rnd()*4|0, s: .6 + .4*rnd() });\n\t\tfunction ex(s, r) { return W*(r ? .7 + .28*s : .3 - .28*s); }\n\t\tfunction wall(v, lo, hi) { return v < lo ? lo - v : v > hi ? hi - v : 0; }\n\t\tfunction poly(p) { x.beginPath(); x.moveTo(p[0], p[1]); for (var j = 2; j < p.length; j += 2) x.lineTo(p[j], p[j+1]); x.fill(); }\n\t\tfunction step(dt, w) {\n\t\t\tvar i, j, b, o, dx, dy, d, n, sx, sy, ax, ay, cx, cy, fx, fy, f, s;\n\t\t\tfor (i = 0; i < N; i++) {\n\t\t\t\tb = B[i]; n = sx = sy = ax = ay = cx = cy = 0;\n\t\t\t\tfor (j = 0; j < N; j++) {\n\t\t\t\t\to = B[j]; dx = o.x - b.x; dy = o.y - b.y; d = dx*dx + dy*dy;\n\t\t\t\t\tif (j !== i && d < 5184) {\n\t\t\t\t\t\tn++; ax += o.vx; ay += o.vy; cx += o.x; cy += o.y;\n\t\t\t\t\t\tif (d < 576) { d = sqrt(d) + .01; f = (24 - d)/(24*d); sx -= dx*f; sy -= dy*f; } // ayrılma\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tf = 520*w[0]; fx = sx*f; fy = sy*f;\n\t\t\t\tif (n) { // hizalanma + bağlanma\n\t\t\t\t\tfx += (ax/n - b.vx)*2.2*w[1] + (cx/n - b.x)*.9*w[2];\n\t\t\t\t\tfy += (ay/n - b.vy)*2.2*w[1] + (cy/n - b.y)*.9*w[2];\n\t\t\t\t}\n\t\t\t\tdx = tx - b.x; dy = ty - b.y; d = sqrt(dx*dx + dy*dy) + .01;\n\t\t\t\tif (mode > 0) { fx += dx*.5; fy += dy*.5; } // ışığı izle\n\t\t\t\telse if (d < 190) { f = (1 - d/190)*1100/d; fx -= dx*f; fy -= dy*f; } // ışıktan kaç\n\t\t\t\tfx += wall(b.x, 36, W - 36)*6;\n\t\t\t\tfy += wall(b.y, H*.2, H*.9)*6 + (H*.62 - b.y)*.3;\n\t\t\t\tb.vx += fx*dt; b.vy += fy*dt;\n\t\t\t\ts = sqrt(b.vx*b.vx + b.vy*b.vy) + .01; f = s > 135 ? 135/s : s < 55 ? 55/s : 1;\n\t\t\t\tb.vx *= f; b.vy *= f; b.x += b.vx*dt; b.y += b.vy*dt;\n\t\t\t}\n\t\t}\n\t\tfunction lamp(s0, e0, ey, r, al, cl) {\n\t\t\tvar g = x.createLinearGradient(0, 0, 0, ey);\n\t\t\tg.addColorStop(0, cl); g.addColorStop(1, P.bg);\n\t\t\tx.globalAlpha = al; x.fillStyle = g; poly([s0 - 4, 0, s0 + 4, 0, e0 + r, ey, e0 - r, ey]);\n\t\t\tx.fillStyle = cl; x.globalAlpha = al*.8; x.beginPath(); x.ellipse(e0, ey, r*1.1, r*.3, 0, 0, PI2); x.fill();\n\t\t}\n\t\tfunction draw(T, w) {\n\t\t\tvar yF = H*.44, yN = H*.92, v = Math.max(13, 10/u), nm = ['ayrılma', 'hizalanma', 'bağlanma'], cc = [P.b, P.a, P.fg], i, k, s, g, b, y;\n\t\t\tx.setTransform(api.dpr*u, 0, 0, api.dpr*u, 0, 0); x.setLineDash([]); x.globalAlpha = 1;\n\t\t\tg = x.createRadialGradient(W/2, yF, 0, W/2, yF, W*.7); g.addColorStop(0, P.c); g.addColorStop(1, P.bg);\n\t\t\tx.fillStyle = g; x.fillRect(0, 0, W, H);\n\t\t\tg = x.createLinearGradient(0, yF, 0, yN); g.addColorStop(0, P.bg); g.addColorStop(1, P.c);\n\t\t\tx.fillStyle = g; poly([ex(0, 0), yF, ex(0, 1), yF, ex(1, 1), yN, ex(1, 0), yN]);\n\t\t\tx.strokeStyle = P.b; x.lineWidth = 1; x.globalAlpha = .35; x.beginPath();\n\t\t\tfor (k = 1; k < 9; k++) { s = k*k/81; y = yF + (yN - yF)*s; x.moveTo(ex(s, 0), y); x.lineTo(ex(s, 1), y); }\n\t\t\tx.stroke();\n\t\t\tx.strokeStyle = P.a; x.lineWidth = 3; x.lineCap = 'round'; x.globalAlpha = .9;\n\t\t\tx.setLineDash([.1, 14]); x.lineDashOffset = api.reducedMotion ? 0 : -T/25;\n\t\t\tx.beginPath(); x.moveTo(ex(0, 0), yF); x.lineTo(ex(1, 0), yN); x.moveTo(ex(0, 1), yF); x.lineTo(ex(1, 1), yN); x.stroke();\n\t\t\tx.globalCompositeOperation = 'lighter';\n\t\t\tfor (k = 0; k < 4; k++) { s = W*(.14 + .24*k); lamp(s, s + sin(T/1800 + k*1.9)*W*.12, yF + (yN - yF)*.55, 46, .2, P.a); }\n\t\t\tlamp(W/2 + (tx - W/2)*.3, tx, ty, 62, .28, P.fg);\n\t\t\tfor (i = 0; i < N; i++) {\n\t\t\t\tb = B[i]; s = b.s*(.8 + 1.2*Math.min(1, Math.max(0, (b.y - yF)/(yN - yF))));\n\t\t\t\tx.save(); x.translate(b.x, b.y); x.rotate(Math.atan2(b.vy, b.vx)); x.scale(s, s);\n\t\t\t\tx.fillStyle = col[b.k]; k = 3 + 2*sin(T/140 + i);\n\t\t\t\tx.globalAlpha = .2; poly([-14, 0, -56, -k, -56, k]);\n\t\t\t\tx.globalAlpha = .9; poly([10, 0, -14, -4, -14, 4]);\n\t\t\t\tx.restore();\n\t\t\t}\n\t\t\tx.globalCompositeOperation = 'source-over'; x.globalAlpha = .85; x.strokeStyle = P.fg; x.lineWidth = 1.5;\n\t\t\tx.setLineDash(mode > 0 ? [] : [4, 4]);\n\t\t\tx.beginPath(); x.arc(tx, ty, 12 + 2*sin(T/200), 0, PI2); x.stroke();\n\t\t\tx.font = v + 'px sans-serif'; x.globalAlpha = .95; x.fillStyle = P.fg;\n\t\t\tx.fillText('Defile podyumu · boids (örnek sahne)', 12, v + 5);\n\t\t\tx.fillStyle = P.a; x.fillText(mode > 0 ? 'Sürü ışığı izliyor · tıkla: kaçsın' : 'Sürü ışıktan kaçıyor · tıkla: izlesin', 12, 2*v + 9);\n\t\t\tfor (i = 0; i < 3; i++) {\n\t\t\t\ty = H - 12 - (2 - i)*(v + 8);\n\t\t\t\tx.fillStyle = P.fg; x.fillText(nm[i], 12, y);\n\t\t\t\tx.fillStyle = cc[i]; x.fillRect(12, y + 3, 90*(w[i] - .55)/.9 + 4, 3);\n\t\t\t}\n\t\t}\n\t\tfunction frame() {\n\t\t\tvar T = api.time(), dt = Math.min(.05, (T - last)/1000)*(api.reducedMotion ? .35 : 1);\n\t\t\tvar w = [0, 1, 2].map(function (k) { return 1 + .45*sin(T/(2900 - 600*k) + 2*k); });\n\t\t\tlast = T;\n\t\t\tif (!inside) {\n\t\t\t\ttx = W*(.5 + .36*sin(T/3100)); ty = H*.62 + sin(T/1300)*H*.07;\n\t\t\t\tif (T - flipT > 9000) { mode = -mode; flipT = T; }\n\t\t\t}\n\t\t\tstep(dt, w); draw(T, w);\n\t\t}\n\t\tfunction pt(e) { var r = c.getBoundingClientRect(); tx = (e.clientX - r.left)/u; ty = (e.clientY - r.top)/u; inside = 1; }\n\t\tapi.on(host, 'pointermove', pt);\n\t\tapi.on(host, 'pointerleave', function () { inside = 0; });\n\t\tapi.on(host, 'pointerdown', function (e) { pt(e); mode = -mode; flipT = api.time(); });\n\t\tfor (i = 0; i < 90; i++) step(1/60, [1, 1, 1]);\n\t\tvar dur = api.raf(frame);\n\t\treturn function () { dur(); };\n\t}\n});\n","ayar":{"palet":{"bg":"#0b0a10","fg":"#f3ede2","a":"#e8c26a","b":"#b0763c","c":"#5c3b1e"},"rm":false,"seed":3,"id":"T000003"},"baslik":"Podyumda boids sürüsü","t":"canvas2d-surusu-boids"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

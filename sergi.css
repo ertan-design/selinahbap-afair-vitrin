@@ -136,6 +136,7 @@ details.kap > .harita { margin-bottom: 0; }
 .ayrinti[open] > summary { margin-bottom: 8px; }
 .kucuk { font: 600 12px var(--mono); background: transparent; color: var(--kagit); border: 1px solid var(--cizgi); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
 .kucuk:hover { background: var(--kagit); color: #000; }
+a.kucuk { text-decoration: none; display: inline-block; }
 .sayfalama { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 26px; font: 600 13px var(--mono); color: var(--sis); }
 .bos-sergi { padding: 40px; text-align: center; color: var(--sis); border: 1px dashed var(--cizgi); border-radius: 18px; }
 

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Podyumda metaball kumaş · Metaball alan eşiği · T000005</title>
+<meta name="description" content="Podyumda soyut figürler ve kumaş: metaball alanı küçük çözünürlükte hesaplanıp eşiklenir, büyütülür (örnek sahne).">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000005</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Podyumda metaball kumaş"></div>
+  <h1>Podyumda metaball kumaş</h1>
+  <p class="ac">Podyumda soyut figürler ve kumaş: metaball alanı küçük çözünürlükte hesaplanıp eşiklenir, büyütülür (örnek sahne).</p>
+  <ul class="etk"><li class="t">Metaball alan eşiği</li><li>Defile podyumu</li><li>Standart</li><li><span class="renkler"><i style="background:#0b0a10"></i><i style="background:#e8c26a"></i><i style="background:#b0763c"></i><i style="background:#5c3b1e"></i></span>Gece altını</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>/* canvas2d-metaball: alan kucuk cozunurlukte hesaplanir, piksel piksel esiklenir (putImageData), buyutulur */
+register({
+  baslik: 'Podyumda metaball kumaş',
+  aciklama: 'Podyumda soyut figürler ve kumaş: metaball alanı küçük çözünürlükte hesaplanıp eşiklenir, büyütülür (örnek sahne).',
+  mount: function (host, api) {
+    var M = Math, P = api.palette, dpr = api.dpr, cv = document.createElement('canvas'), x = cv.getContext('2d'),
+      lo = document.createElement('canvas'), lx = lo.getContext('2d'), T = [.22, .55, 1.1, 2],
+      L = new Uint8ClampedArray(1024), L32 = new Uint32Array(L.buffer), S = [0, 0, 0, 0, 0],
+      B = [-.065, .055, .05, 0, .055, .05, .065, .055, .05, -.036, .115, .044, .036, .115, .044, 0, .17, .04, 0, .225, .03, 0, .275, .028,
+        0, .33, .036, -.034, .352, .025, .034, .352, .025, .003, .385, .02, .008, .43, .027],
+      W, H, w, h, u, F, G, ID, D32, FY, TY, gW, gD, gB, gP, i, j, m;
+    function rgb(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5), 16)]; }
+    function q(c, a) { return 'rgba(' + rgb(c) + ',' + a + ')'; }
+    function ss(a, b, v) { v = M.min(1, M.max(0, (v - a) / (b - a))); return v * v * (3 - 2 * v); }
+    function lg(y0, y1, c0, a0, c1, a1) { var g = x.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, q(c0, a0)); g.addColorStop(1, q(c1, a1)); return g; }
+    var K = [P.c, P.b, P.a, P.fg].map(rgb);
+    for (i = 0; i &lt; 256; i++) { /* esik tablosu: alan -&gt; bant rengi */
+      var v = i / 100, c = K[0].slice(), s;
+      for (j = 1; j &lt; 4; j++) { s = ss(T[j] - .05, T[j] + .05, v); for (m = 0; m &lt; 3; m++) c[m] += (K[j][m] - c[m]) * s; }
+      L.set([c[0], c[1], c[2], 255 * ss(T[0] - .12, T[0] + .08, v)], i * 4);
+    }
+    function fit() {
+      W = api.width; H = api.height; cv.width = W * dpr | 0; cv.height = H * dpr | 0;
+      w = M.min(360, M.max(80, W / 2.7 | 0)); h = M.max(40, w * H / W | 0); u = M.min(h, w * .62);
+      lo.width = w; lo.height = h; F = new Float32Array(w * h); G = new Float32Array(w);
+      ID = lx.createImageData(w, h); D32 = new Uint32Array(ID.data.buffer);
+      FY = H * .74; TY = H * .05;
+      gW = x.createRadialGradient(W / 2, FY, 0, W / 2, FY, W * .7); gW.addColorStop(0, q(P.c, .55)); gW.addColorStop(1, q(P.c, 0));
+      gD = lg(FY, H, P.c, .3, P.bg, .95); gB = lg(TY, FY, P.a, .2, P.a, .02);
+      gP = x.createRadialGradient(0, 0, 0, 0, 0, 1); gP.addColorStop(0, q(P.fg, .4)); gP.addColorStop(1, q(P.a, 0));
+    }
+    function sp(cx, cy, r) { /* metaball: (1 - d2/R2)^3 alana eklenir */
+      var R = r * u * 1.55, R2 = R * R, x1 = M.min(w - 1, cx + R | 0), y1 = M.min(h - 1, cy + R | 0), px, py, dx, dy, d;
+      for (py = M.max(0, cy - R | 0); py &lt;= y1; py++) {
+        dy = py + .5 - cy;
+        for (px = M.max(0, cx - R | 0); px &lt;= x1; px++) { dx = px + .5 - cx; d = 1 - (dx * dx + dy * dy) / R2; if (d &gt; 0) F[py * w + px] += d * d * d; }
+      }
+    }
+    function draw() {
+      var t = (api.reducedMotion ? 0 : api.time() / 1e3) + 3, N = M.min(8, M.max(2, M.round(w / u * 1.9))), LL = w + .6 * u, sc = W / w,
+        fy = h * .74, k, X, Y, z, s, r, xx, yy, d, g, n;
+      F.fill(0);
+      for (k = 0; k &lt; 5; k++) S[k] = w * (k + .5) / 5 + M.sin(t * .5 + k * 2.1) * w * .04;
+      for (k = 0; k &lt; N; k++) { /* soyut figur + akan kumas */
+        X = (t * .08 * w + (k + .3) * LL / N) % LL - .15 * u; s = M.sin(t * 3 + k * 1.9); Y = fy - M.abs(s) * .006 * u; z = 1.08 + .1 * M.sin(k * 2.7);
+        for (j = 0; j &lt; B.length; j += 3) sp(X + (B[j] + s * (.015 - B[j + 1] * .05)) * u * z, Y - B[j + 1] * u * z, B[j + 2] * z);
+        for (X -= .02 * u, j = 1; j &lt; 15; j++) { r = (.03 - j * .0013) * z; X -= 1.15 * r * u; sp(X, fy - (.345 - j * .007) * u * z + M.sin(t * 3.2 - j * .5 + k * 2) * j * .003 * u, r); }
+      }
+      for (j = 0, n = w / (.03 * u) | 0; j &lt;= n; j++) { s = j / n * 5; sp(j * w / n, h * (.075 + .06 * M.sin(M.PI * (s % 1)) * (1 + .25 * M.sin(t * 1.2 + (s | 0) * 1.7))), .026); }
+      for (xx = 0; xx &lt; w; xx++) { g = 1; for (k = 0; k &lt; 5; k++) { d = (xx - S[k]) / (w * .09); g += .7 * M.exp(-d * d); } G[xx] = g; }
+      for (n = yy = 0; yy &lt; h; yy++) for (g = 1.3 - .6 * yy / h, xx = 0; xx &lt; w; xx++, n++) { k = F[n] * G[xx] * g * 100 | 0; D32[n] = L32[k &gt; 255 ? 255 : k]; }
+      lx.putImageData(ID, 0, 0);
+      x.setTransform(dpr, 0, 0, dpr, 0, 0);
+      x.fillStyle = P.bg; x.fillRect(0, 0, W, H); x.fillStyle = gW; x.fillRect(0, 0, W, FY);
+      for (k = 0; k &lt; 24; k++) { x.fillStyle = q(P.c, .1 + .08 * M.sin(k * 2.1)); x.fillRect(k * W / 24, TY, W / 24, FY - TY); }
+      x.imageSmoothingQuality = 'high'; x.drawImage(lo, 0, 0, W, H);
+      x.save(); x.beginPath(); x.rect(0, FY, W, H - FY); x.clip();
+      x.globalAlpha = .3; x.translate(0, 2 * FY); x.scale(1, -1); x.drawImage(lo, 0, 0, W, H); x.restore();
+      x.fillStyle = gD; x.fillRect(0, FY, W, H - FY);
+      x.globalCompositeOperation = 'lighter';
+      for (k = 0; k &lt; 5; k++) {
+        s = S[k] * sc; x.fillStyle = gB; x.beginPath(); x.moveTo(s - 4, TY); x.lineTo(s + 4, TY); x.lineTo(s + W * .11, FY); x.lineTo(s - W * .11, FY); x.fill();
+        x.save(); x.translate(s, FY + H * .03); x.scale(W * .12, H * .035); x.fillStyle = gP; x.beginPath(); x.arc(0, 0, 1, 0, 7); x.fill(); x.restore();
+        x.fillStyle = P.fg; x.beginPath(); x.arc(s, TY + 2, 3, 0, 7); x.fill();
+      }
+      x.globalCompositeOperation = 'source-over';
+      x.fillStyle = q(P.a, .55); x.fillRect(0, FY, W, 1.5); x.fillStyle = P.c; x.fillRect(0, TY - 2, W, 3);
+      x.font = (10 + M.min(4, W / 400 | 0)) + 'px system-ui,sans-serif'; x.fillStyle = q(P.fg, .75);
+      x.fillText('örnek sahne · soyut figür ve kumaş · eşik 0,22 · 0,55 · 1,1 · 2', 12, H - 12);
+    }
+    host.appendChild(cv); cv.style.cssText = 'display:block;width:100%;height:100%';
+    fit(); api.onResize(fit); draw();
+    var dur = api.raf(draw);
+    return function () { dur(); cv.remove(); };
+  }
+});
+</pre></details>
+  <p class="alt">T000005 · alt-04 · 5938 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"/* canvas2d-metaball: alan kucuk cozunurlukte hesaplanir, piksel piksel esiklenir (putImageData), buyutulur */\nregister({\n  baslik: 'Podyumda metaball kumaş',\n  aciklama: 'Podyumda soyut figürler ve kumaş: metaball alanı küçük çözünürlükte hesaplanıp eşiklenir, büyütülür (örnek sahne).',\n  mount: function (host, api) {\n    var M = Math, P = api.palette, dpr = api.dpr, cv = document.createElement('canvas'), x = cv.getContext('2d'),\n      lo = document.createElement('canvas'), lx = lo.getContext('2d'), T = [.22, .55, 1.1, 2],\n      L = new Uint8ClampedArray(1024), L32 = new Uint32Array(L.buffer), S = [0, 0, 0, 0, 0],\n      B = [-.065, .055, .05, 0, .055, .05, .065, .055, .05, -.036, .115, .044, .036, .115, .044, 0, .17, .04, 0, .225, .03, 0, .275, .028,\n        0, .33, .036, -.034, .352, .025, .034, .352, .025, .003, .385, .02, .008, .43, .027],\n      W, H, w, h, u, F, G, ID, D32, FY, TY, gW, gD, gB, gP, i, j, m;\n    function rgb(c) { return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5), 16)]; }\n    function q(c, a) { return 'rgba(' + rgb(c) + ',' + a + ')'; }\n    function ss(a, b, v) { v = M.min(1, M.max(0, (v - a) / (b - a))); return v * v * (3 - 2 * v); }\n    function lg(y0, y1, c0, a0, c1, a1) { var g = x.createLinearGradient(0, y0, 0, y1); g.addColorStop(0, q(c0, a0)); g.addColorStop(1, q(c1, a1)); return g; }\n    var K = [P.c, P.b, P.a, P.fg].map(rgb);\n    for (i = 0; i < 256; i++) { /* esik tablosu: alan -> bant rengi */\n      var v = i / 100, c = K[0].slice(), s;\n      for (j = 1; j < 4; j++) { s = ss(T[j] - .05, T[j] + .05, v); for (m = 0; m < 3; m++) c[m] += (K[j][m] - c[m]) * s; }\n      L.set([c[0], c[1], c[2], 255 * ss(T[0] - .12, T[0] + .08, v)], i * 4);\n    }\n    function fit() {\n      W = api.width; H = api.height; cv.width = W * dpr | 0; cv.height = H * dpr | 0;\n      w = M.min(360, M.max(80, W / 2.7 | 0)); h = M.max(40, w * H / W | 0); u = M.min(h, w * .62);\n      lo.width = w; lo.height = h; F = new Float32Array(w * h); G = new Float32Array(w);\n      ID = lx.createImageData(w, h); D32 = new Uint32Array(ID.data.buffer);\n      FY = H * .74; TY = H * .05;\n      gW = x.createRadialGradient(W / 2, FY, 0, W / 2, FY, W * .7); gW.addColorStop(0, q(P.c, .55)); gW.addColorStop(1, q(P.c, 0));\n      gD = lg(FY, H, P.c, .3, P.bg, .95); gB = lg(TY, FY, P.a, .2, P.a, .02);\n      gP = x.createRadialGradient(0, 0, 0, 0, 0, 1); gP.addColorStop(0, q(P.fg, .4)); gP.addColorStop(1, q(P.a, 0));\n    }\n    function sp(cx, cy, r) { /* metaball: (1 - d2/R2)^3 alana eklenir */\n      var R = r * u * 1.55, R2 = R * R, x1 = M.min(w - 1, cx + R | 0), y1 = M.min(h - 1, cy + R | 0), px, py, dx, dy, d;\n      for (py = M.max(0, cy - R | 0); py <= y1; py++) {\n        dy = py + .5 - cy;\n        for (px = M.max(0, cx - R | 0); px <= x1; px++) { dx = px + .5 - cx; d = 1 - (dx * dx + dy * dy) / R2; if (d > 0) F[py * w + px] += d * d * d; }\n      }\n    }\n    function draw() {\n      var t = (api.reducedMotion ? 0 : api.time() / 1e3) + 3, N = M.min(8, M.max(2, M.round(w / u * 1.9))), LL = w + .6 * u, sc = W / w,\n        fy = h * .74, k, X, Y, z, s, r, xx, yy, d, g, n;\n      F.fill(0);\n      for (k = 0; k < 5; k++) S[k] = w * (k + .5) / 5 + M.sin(t * .5 + k * 2.1) * w * .04;\n      for (k = 0; k < N; k++) { /* soyut figur + akan kumas */\n        X = (t * .08 * w + (k + .3) * LL / N) % LL - .15 * u; s = M.sin(t * 3 + k * 1.9); Y = fy - M.abs(s) * .006 * u; z = 1.08 + .1 * M.sin(k * 2.7);\n        for (j = 0; j < B.length; j += 3) sp(X + (B[j] + s * (.015 - B[j + 1] * .05)) * u * z, Y - B[j + 1] * u * z, B[j + 2] * z);\n        for (X -= .02 * u, j = 1; j < 15; j++) { r = (.03 - j * .0013) * z; X -= 1.15 * r * u; sp(X, fy - (.345 - j * .007) * u * z + M.sin(t * 3.2 - j * .5 + k * 2) * j * .003 * u, r); }\n      }\n      for (j = 0, n = w / (.03 * u) | 0; j <= n; j++) { s = j / n * 5; sp(j * w / n, h * (.075 + .06 * M.sin(M.PI * (s % 1)) * (1 + .25 * M.sin(t * 1.2 + (s | 0) * 1.7))), .026); }\n      for (xx = 0; xx < w; xx++) { g = 1; for (k = 0; k < 5; k++) { d = (xx - S[k]) / (w * .09); g += .7 * M.exp(-d * d); } G[xx] = g; }\n      for (n = yy = 0; yy < h; yy++) for (g = 1.3 - .6 * yy / h, xx = 0; xx < w; xx++, n++) { k = F[n] * G[xx] * g * 100 | 0; D32[n] = L32[k > 255 ? 255 : k]; }\n      lx.putImageData(ID, 0, 0);\n      x.setTransform(dpr, 0, 0, dpr, 0, 0);\n      x.fillStyle = P.bg; x.fillRect(0, 0, W, H); x.fillStyle = gW; x.fillRect(0, 0, W, FY);\n      for (k = 0; k < 24; k++) { x.fillStyle = q(P.c, .1 + .08 * M.sin(k * 2.1)); x.fillRect(k * W / 24, TY, W / 24, FY - TY); }\n      x.imageSmoothingQuality = 'high'; x.drawImage(lo, 0, 0, W, H);\n      x.save(); x.beginPath(); x.rect(0, FY, W, H - FY); x.clip();\n      x.globalAlpha = .3; x.translate(0, 2 * FY); x.scale(1, -1); x.drawImage(lo, 0, 0, W, H); x.restore();\n      x.fillStyle = gD; x.fillRect(0, FY, W, H - FY);\n      x.globalCompositeOperation = 'lighter';\n      for (k = 0; k < 5; k++) {\n        s = S[k] * sc; x.fillStyle = gB; x.beginPath(); x.moveTo(s - 4, TY); x.lineTo(s + 4, TY); x.lineTo(s + W * .11, FY); x.lineTo(s - W * .11, FY); x.fill();\n        x.save(); x.translate(s, FY + H * .03); x.scale(W * .12, H * .035); x.fillStyle = gP; x.beginPath(); x.arc(0, 0, 1, 0, 7); x.fill(); x.restore();\n        x.fillStyle = P.fg; x.beginPath(); x.arc(s, TY + 2, 3, 0, 7); x.fill();\n      }\n      x.globalCompositeOperation = 'source-over';\n      x.fillStyle = q(P.a, .55); x.fillRect(0, FY, W, 1.5); x.fillStyle = P.c; x.fillRect(0, TY - 2, W, 3);\n      x.font = (10 + M.min(4, W / 400 | 0)) + 'px system-ui,sans-serif'; x.fillStyle = q(P.fg, .75);\n      x.fillText('örnek sahne · soyut figür ve kumaş · eşik 0,22 · 0,55 · 1,1 · 2', 12, H - 12);\n    }\n    host.appendChild(cv); cv.style.cssText = 'display:block;width:100%;height:100%';\n    fit(); api.onResize(fit); draw();\n    var dur = api.raf(draw);\n    return function () { dur(); cv.remove(); };\n  }\n});\n","ayar":{"palet":{"bg":"#0b0a10","fg":"#f3ede2","a":"#e8c26a","b":"#b0763c","c":"#5c3b1e"},"rm":false,"seed":5,"id":"T000005"},"baslik":"Podyumda metaball kumaş","t":"canvas2d-metaball"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

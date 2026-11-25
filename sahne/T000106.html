@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Reaksiyon-difüzyon (Gray-Scott) · Reaksiyon-difüzyon (Gray-Scott) · T000106</title>
+<meta name="description" content="İki kimyasal alan; besleme ve öldürme oranlarıyla benekli desenler oluşuyor (örnek veri).">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000106</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Reaksiyon-difüzyon (Gray-Scott)"></div>
+  <h1>Reaksiyon-difüzyon (Gray-Scott)</h1>
+  <p class="ac">İki kimyasal alan; besleme ve öldürme oranlarıyla benekli desenler oluşuyor (örnek veri).</p>
+  <ul class="etk"><li class="t">Reaksiyon-difüzyon (Gray-Scott)</li><li>Kapı ızgarası</li><li>Standart</li><li><span class="renkler"><i style="background:#17131a"></i><i style="background:#f2b8c6"></i><i style="background:#d98ca3"></i><i style="background:#8a5a6a"></i></span>Pudra</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>register({
+  baslik: 'Reaksiyon-difüzyon (Gray-Scott)',
+  aciklama: 'İki kimyasal alan; besleme ve öldürme oranlarıyla benekli desenler oluşuyor (örnek veri).',
+  mount: function (host, api) {
+    var c = document.createElement('canvas');
+    c.style.cssText = 'display:block;width:100%;height:100%';
+    host.appendChild(c);
+    var x = c.getContext('2d'), P = api.palette, R = api.rng(106);
+    var N = 96, A = new Float32Array(N * N), B = new Float32Array(N * N);
+    var A2 = new Float32Array(N * N), B2 = new Float32Array(N * N);
+    var F = 0.037, K = 0.06, DA = 1.0, DB = 0.5, lastReset = 0;
+    function seed() {
+      var s, i, j, px, py, cx, cy;
+      A.fill(1);
+      B.fill(0);
+      for (s = 0; s &lt; 6; s++) {
+        cx = (R() * N) | 0;
+        cy = (R() * N) | 0;
+        for (j = -4; j &lt;= 4; j++) {
+          for (i = -4; i &lt;= 4; i++) {
+            px = (cx + i + N) % N;
+            py = (cy + j + N) % N;
+            B[py * N + px] = 1;
+            A[py * N + px] = 0.5;
+          }
+        }
+      }
+    }
+    function step() {
+      var xx, y, i, l, r, u, d, lapA, lapB, ab2, t;
+      for (y = 0; y &lt; N; y++) {
+        for (xx = 0; xx &lt; N; xx++) {
+          i = y * N + xx;
+          l = ((xx - 1 + N) % N) + y * N;
+          r = ((xx + 1) % N) + y * N;
+          u = xx + ((y - 1 + N) % N) * N;
+          d = xx + ((y + 1) % N) * N;
+          lapA = A[l] + A[r] + A[u] + A[d] - 4 * A[i];
+          lapB = B[l] + B[r] + B[u] + B[d] - 4 * B[i];
+          ab2 = A[i] * B[i] * B[i];
+          A2[i] = A[i] + (DA * lapA - ab2 + F * (1 - A[i]));
+          B2[i] = B[i] + (DB * lapB + ab2 - (F + K) * B[i]);
+        }
+      }
+      t = A; A = A2; A2 = t;
+      t = B; B = B2; B2 = t;
+    }
+    function fit() {
+      c.width = Math.max(2, api.width * api.dpr | 0);
+      c.height = Math.max(2, api.height * api.dpr | 0);
+    }
+    function draw() {
+      var i, px, py;
+      x.setTransform(1, 0, 0, 1, 0, 0);
+      x.fillStyle = P.bg;
+      x.fillRect(0, 0, c.width, c.height);
+      x.setTransform(c.width / N, 0, 0, c.height / N, 0, 0);
+      for (py = 0; py &lt; N; py++) {
+        for (px = 0; px &lt; N; px++) {
+          i = py * N + px;
+          x.globalAlpha = Math.min(1, B[i] * 2);
+          x.fillStyle = B[i] &gt; 0.5 ? P.a : P.b;
+          x.fillRect(px, py, 1, 1);
+        }
+      }
+      x.globalAlpha = 1;
+      x.setTransform(1, 0, 0, 1, 0, 0);
+    }
+    fit();
+    api.onResize(fit);
+    seed();
+    var dur = api.raf(function () {
+      var k, now = api.time();
+      if (now - lastReset &gt; 30000) { seed(); lastReset = now; }
+      for (k = 0; k &lt; 8; k++) step();
+      draw();
+    });
+    return function () { dur(); };
+  }
+});
+</pre></details>
+  <p class="alt">T000106 · alt-22 · 2661 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"register({\n  baslik: 'Reaksiyon-difüzyon (Gray-Scott)',\n  aciklama: 'İki kimyasal alan; besleme ve öldürme oranlarıyla benekli desenler oluşuyor (örnek veri).',\n  mount: function (host, api) {\n    var c = document.createElement('canvas');\n    c.style.cssText = 'display:block;width:100%;height:100%';\n    host.appendChild(c);\n    var x = c.getContext('2d'), P = api.palette, R = api.rng(106);\n    var N = 96, A = new Float32Array(N * N), B = new Float32Array(N * N);\n    var A2 = new Float32Array(N * N), B2 = new Float32Array(N * N);\n    var F = 0.037, K = 0.06, DA = 1.0, DB = 0.5, lastReset = 0;\n    function seed() {\n      var s, i, j, px, py, cx, cy;\n      A.fill(1);\n      B.fill(0);\n      for (s = 0; s < 6; s++) {\n        cx = (R() * N) | 0;\n        cy = (R() * N) | 0;\n        for (j = -4; j <= 4; j++) {\n          for (i = -4; i <= 4; i++) {\n            px = (cx + i + N) % N;\n            py = (cy + j + N) % N;\n            B[py * N + px] = 1;\n            A[py * N + px] = 0.5;\n          }\n        }\n      }\n    }\n    function step() {\n      var xx, y, i, l, r, u, d, lapA, lapB, ab2, t;\n      for (y = 0; y < N; y++) {\n        for (xx = 0; xx < N; xx++) {\n          i = y * N + xx;\n          l = ((xx - 1 + N) % N) + y * N;\n          r = ((xx + 1) % N) + y * N;\n          u = xx + ((y - 1 + N) % N) * N;\n          d = xx + ((y + 1) % N) * N;\n          lapA = A[l] + A[r] + A[u] + A[d] - 4 * A[i];\n          lapB = B[l] + B[r] + B[u] + B[d] - 4 * B[i];\n          ab2 = A[i] * B[i] * B[i];\n          A2[i] = A[i] + (DA * lapA - ab2 + F * (1 - A[i]));\n          B2[i] = B[i] + (DB * lapB + ab2 - (F + K) * B[i]);\n        }\n      }\n      t = A; A = A2; A2 = t;\n      t = B; B = B2; B2 = t;\n    }\n    function fit() {\n      c.width = Math.max(2, api.width * api.dpr | 0);\n      c.height = Math.max(2, api.height * api.dpr | 0);\n    }\n    function draw() {\n      var i, px, py;\n      x.setTransform(1, 0, 0, 1, 0, 0);\n      x.fillStyle = P.bg;\n      x.fillRect(0, 0, c.width, c.height);\n      x.setTransform(c.width / N, 0, 0, c.height / N, 0, 0);\n      for (py = 0; py < N; py++) {\n        for (px = 0; px < N; px++) {\n          i = py * N + px;\n          x.globalAlpha = Math.min(1, B[i] * 2);\n          x.fillStyle = B[i] > 0.5 ? P.a : P.b;\n          x.fillRect(px, py, 1, 1);\n        }\n      }\n      x.globalAlpha = 1;\n      x.setTransform(1, 0, 0, 1, 0, 0);\n    }\n    fit();\n    api.onResize(fit);\n    seed();\n    var dur = api.raf(function () {\n      var k, now = api.time();\n      if (now - lastReset > 30000) { seed(); lastReset = now; }\n      for (k = 0; k < 8; k++) step();\n      draw();\n    });\n    return function () { dur(); };\n  }\n});\n","ayar":{"palet":{"bg":"#17131a","fg":"#f7ece8","a":"#f2b8c6","b":"#d98ca3","c":"#8a5a6a"},"rm":false,"seed":106,"id":"T000106"},"baslik":"Reaksiyon-difüzyon (Gray-Scott)","t":"canvas2d-reaksiyon-difuzyon"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

@@ -6,4 +6,5 @@ bu depo yalnız sonucu sergiler.
 
 - Canlı yayın yok; sahneler ve sayaçlar örnektir ("örnek" etiketli).
 - Sıfır npm/CDN bağımlılığı; `index.html` doğrudan açılır.
+- Her sahnenin ayrı, kendi kendine yeten sayfası var: `sahne/T000123.html` (tam liste: `link-haritasi.txt`).
 - Lisans: belirtilmedi.

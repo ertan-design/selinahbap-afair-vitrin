@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Kromatik sapma ve film greni · Kromatik sapma + film greni · T000015</title>
+<meta name="description" content="kromatik-sapma: kanallari ayri ayri kaydiran son islem; vinyet ve film greni ile. Ornek sahne uzerinde.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000015</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Kromatik sapma ve film greni"></div>
+  <h1>Kromatik sapma ve film greni</h1>
+  <p class="ac">kromatik-sapma: kanallari ayri ayri kaydiran son islem; vinyet ve film greni ile. Ornek sahne uzerinde.</p>
+  <ul class="etk"><li class="t">Kromatik sapma + film greni</li><li>Defile podyumu</li><li>Standart</li><li><span class="renkler"><i style="background:#0b0a10"></i><i style="background:#e8c26a"></i><i style="background:#b0763c"></i><i style="background:#5c3b1e"></i></span>Gece altını</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>register({
+  baslik: 'Kromatik sapma ve film greni',
+  aciklama: 'kromatik-sapma: kanallari ayri ayri kaydiran son islem; vinyet ve film greni ile. Ornek sahne uzerinde.',
+  mount: function (host, api) {
+    var c = document.createElement('canvas');
+    c.style.cssText = 'display:block;width:100%;height:100%';
+    host.appendChild(c);
+    var s = document.createElement('canvas'), sx = s.getContext('2d');
+    var gl = c.getContext('webgl2');
+    var P = api.palette;
+    function fit() {
+      c.width = Math.max(2, api.width * api.dpr | 0); c.height = Math.max(2, api.height * api.dpr | 0);
+      s.width = c.width; s.height = c.height;
+      if (gl) gl.viewport(0, 0, c.width, c.height);
+    }
+    fit(); api.onResize(fit);
+    function scene(t) {
+      var W = s.width, H = s.height;
+      sx.globalAlpha = 1; sx.fillStyle = P.bg; sx.fillRect(0, 0, W, H);
+      var cols = [P.a, P.b, P.fg];
+      for (var i = 0; i &lt; 9; i++) {
+        var a = t * 0.4 + i * 0.7;
+        sx.beginPath();
+        sx.arc(W * (0.5 + 0.3 * Math.cos(a * (1 + (i % 3) * 0.3))), H * (0.5 + 0.3 * Math.sin(a * 0.8 + i)), H * (0.05 + 0.02 * (i % 4)), 0, 6.2832);
+        sx.fillStyle = cols[i % 3]; sx.globalAlpha = 0.75; sx.fill();
+      }
+      sx.globalAlpha = 1; sx.fillStyle = P.fg; sx.textAlign = 'center';
+      sx.font = Math.round(H * 0.08) + 'px serif';
+      sx.fillText('Ornek sahne', W / 2, H * 0.92);
+    }
+    var prog = null, tex = null, U = {}, buf = null;
+    if (gl) {
+      var VS = '#version 300 es\nin vec2 aP;\nvoid main() { gl_Position = vec4(aP, 0.0, 1.0); }\n';
+      var FS = '#version 300 es\nprecision highp float;\n' +
+        'uniform sampler2D uTex; uniform vec2 uRes; uniform float uT;\n' +
+        'out vec4 o;\n' +
+        'float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }\n' +
+        'void main() {\n' +
+        '  vec2 uv = gl_FragCoord.xy / uRes; vec2 d = uv - 0.5;\n' +
+        '  float ab = 0.010 + 0.006 * sin(uT * 0.9);\n' +
+        '  vec2 off = d * ab;\n' +
+        '  vec3 col = vec3(texture(uTex, uv + off).r, texture(uTex, uv).g, texture(uTex, uv - off).b);\n' +
+        '  col *= 1.0 - 0.6 * smoothstep(0.2, 0.75, length(d));\n' +
+        '  float n = hash(gl_FragCoord.xy + fract(uT) * 997.0);\n' +
+        '  col += (n - 0.5) * 0.12;\n' +
+        '  o = vec4(clamp(col, 0.0, 1.0), 1.0);\n' +
+        '}\n';
+      var sh = function (t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; };
+      prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+      gl.bindAttribLocation(prog, 0, 'aP');
+      gl.linkProgram(prog);
+      gl.useProgram(prog);
+      U.uTex = gl.getUniformLocation(prog, 'uTex');
+      U.uRes = gl.getUniformLocation(prog, 'uRes');
+      U.uT = gl.getUniformLocation(prog, 'uT');
+      buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      gl.bindVertexArray(gl.createVertexArray());
+      gl.enableVertexAttribArray(0);
+      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+      tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    }
+    var stop = api.raf(function () {
+      var t = api.reducedMotion ? 1.0 : api.time() / 1000;
+      scene(t);
+      if (gl) {
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, s);
+        gl.useProgram(prog);
+        gl.uniform1i(U.uTex, 0); gl.uniform2f(U.uRes, c.width, c.height); gl.uniform1f(U.uT, t);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      } else {
+        c.getContext('2d').drawImage(s, 0, 0);
+      }
+    });
+    return function () { stop(); if (gl) gl.deleteProgram(prog); };
+  }
+});
+</pre></details>
+  <p class="alt">T000015 · alt-09 · 4213 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"register({\n  baslik: 'Kromatik sapma ve film greni',\n  aciklama: 'kromatik-sapma: kanallari ayri ayri kaydiran son islem; vinyet ve film greni ile. Ornek sahne uzerinde.',\n  mount: function (host, api) {\n    var c = document.createElement('canvas');\n    c.style.cssText = 'display:block;width:100%;height:100%';\n    host.appendChild(c);\n    var s = document.createElement('canvas'), sx = s.getContext('2d');\n    var gl = c.getContext('webgl2');\n    var P = api.palette;\n    function fit() {\n      c.width = Math.max(2, api.width * api.dpr | 0); c.height = Math.max(2, api.height * api.dpr | 0);\n      s.width = c.width; s.height = c.height;\n      if (gl) gl.viewport(0, 0, c.width, c.height);\n    }\n    fit(); api.onResize(fit);\n    function scene(t) {\n      var W = s.width, H = s.height;\n      sx.globalAlpha = 1; sx.fillStyle = P.bg; sx.fillRect(0, 0, W, H);\n      var cols = [P.a, P.b, P.fg];\n      for (var i = 0; i < 9; i++) {\n        var a = t * 0.4 + i * 0.7;\n        sx.beginPath();\n        sx.arc(W * (0.5 + 0.3 * Math.cos(a * (1 + (i % 3) * 0.3))), H * (0.5 + 0.3 * Math.sin(a * 0.8 + i)), H * (0.05 + 0.02 * (i % 4)), 0, 6.2832);\n        sx.fillStyle = cols[i % 3]; sx.globalAlpha = 0.75; sx.fill();\n      }\n      sx.globalAlpha = 1; sx.fillStyle = P.fg; sx.textAlign = 'center';\n      sx.font = Math.round(H * 0.08) + 'px serif';\n      sx.fillText('Ornek sahne', W / 2, H * 0.92);\n    }\n    var prog = null, tex = null, U = {}, buf = null;\n    if (gl) {\n      var VS = '#version 300 es\\nin vec2 aP;\\nvoid main() { gl_Position = vec4(aP, 0.0, 1.0); }\\n';\n      var FS = '#version 300 es\\nprecision highp float;\\n' +\n        'uniform sampler2D uTex; uniform vec2 uRes; uniform float uT;\\n' +\n        'out vec4 o;\\n' +\n        'float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453); }\\n' +\n        'void main() {\\n' +\n        '  vec2 uv = gl_FragCoord.xy / uRes; vec2 d = uv - 0.5;\\n' +\n        '  float ab = 0.010 + 0.006 * sin(uT * 0.9);\\n' +\n        '  vec2 off = d * ab;\\n' +\n        '  vec3 col = vec3(texture(uTex, uv + off).r, texture(uTex, uv).g, texture(uTex, uv - off).b);\\n' +\n        '  col *= 1.0 - 0.6 * smoothstep(0.2, 0.75, length(d));\\n' +\n        '  float n = hash(gl_FragCoord.xy + fract(uT) * 997.0);\\n' +\n        '  col += (n - 0.5) * 0.12;\\n' +\n        '  o = vec4(clamp(col, 0.0, 1.0), 1.0);\\n' +\n        '}\\n';\n      var sh = function (t, src) { var o = gl.createShader(t); gl.shaderSource(o, src); gl.compileShader(o); return o; };\n      prog = gl.createProgram();\n      gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));\n      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));\n      gl.bindAttribLocation(prog, 0, 'aP');\n      gl.linkProgram(prog);\n      gl.useProgram(prog);\n      U.uTex = gl.getUniformLocation(prog, 'uTex');\n      U.uRes = gl.getUniformLocation(prog, 'uRes');\n      U.uT = gl.getUniformLocation(prog, 'uT');\n      buf = gl.createBuffer();\n      gl.bindBuffer(gl.ARRAY_BUFFER, buf);\n      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);\n      gl.bindVertexArray(gl.createVertexArray());\n      gl.enableVertexAttribArray(0);\n      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);\n      tex = gl.createTexture();\n      gl.bindTexture(gl.TEXTURE_2D, tex);\n      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);\n    }\n    var stop = api.raf(function () {\n      var t = api.reducedMotion ? 1.0 : api.time() / 1000;\n      scene(t);\n      if (gl) {\n        gl.bindTexture(gl.TEXTURE_2D, tex);\n        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, s);\n        gl.useProgram(prog);\n        gl.uniform1i(U.uTex, 0); gl.uniform2f(U.uRes, c.width, c.height); gl.uniform1f(U.uT, t);\n        gl.drawArrays(gl.TRIANGLES, 0, 3);\n      } else {\n        c.getContext('2d').drawImage(s, 0, 0);\n      }\n    });\n    return function () { stop(); if (gl) gl.deleteProgram(prog); };\n  }\n});\n","ayar":{"palet":{"bg":"#0b0a10","fg":"#f3ede2","a":"#e8c26a","b":"#b0763c","c":"#5c3b1e"},"rm":false,"seed":15,"id":"T000015"},"baslik":"Kromatik sapma ve film greni","t":"webgl2-kromatik-sapma"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

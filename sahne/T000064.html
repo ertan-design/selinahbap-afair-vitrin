@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="noindex,nofollow">
+<title>Akışkan simülasyonu · Akışkan simülasyonu · T000064</title>
+<meta name="description" content="Stable Fluids: palet renkli boya bir hız alanında akar.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#07070a;--yuzey:#0e0e13;--yuzey2:#16161d;--cizgi:#24242e;--kagit:#f3eee5;--sis:#a8a5af;--vurgu:#e7d0a0;--gul:#e58aa8;--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--mono:ui-monospace,"Cascadia Code",Consolas,monospace;--sans:system-ui,"Segoe UI",Roboto,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ink);color:var(--kagit);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--vurgu);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--vurgu);outline-offset:3px;border-radius:4px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--cizgi)}
+.geri{font:700 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
+.kapi{font:600 12px/1 var(--mono);letter-spacing:.14em;color:var(--sis);margin-left:auto}
+.anahtar{display:inline-flex;align-items:center;gap:8px;font:600 12px var(--mono);letter-spacing:.08em;color:var(--sis);cursor:pointer}
+.anahtar input{appearance:none;width:38px;height:22px;border-radius:999px;background:var(--cizgi);position:relative;margin:0;cursor:pointer}
+.anahtar input::after{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--kagit);transition:transform .2s}
+.anahtar input:checked{background:var(--vurgu)}
+.anahtar input:checked::after{transform:translateX(16px);background:#000}
+main{width:min(1180px,100% - 32px);margin:24px auto 72px}
+.sahne{position:relative;aspect-ratio:16/10;width:100%;max-height:calc(100vh - 150px);background:#000;border:1px solid var(--cizgi);border-radius:18px;overflow:hidden;margin-inline:auto}
+.sahne iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+h1{font:600 clamp(30px,5vw,56px)/1.05 var(--serif);letter-spacing:-.015em;margin:28px 0 10px}
+.ac{color:var(--sis);max-width:60ch;margin:0;font-size:clamp(16px,2vw,19px)}
+.etk{list-style:none;display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:18px 0}
+.etk li{font:600 11px var(--mono);letter-spacing:.04em;padding:5px 9px;border-radius:999px;background:var(--yuzey2);border:1px solid var(--cizgi);color:var(--sis)}
+.etk li.t{color:var(--vurgu);border-color:color-mix(in srgb,var(--vurgu) 45%,var(--cizgi))}
+.renkler{display:inline-flex;gap:3px;vertical-align:middle;margin-right:6px}
+.renkler i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid #0006}
+.not{font-size:13px;color:var(--sis)}
+.not button{font:600 12px var(--mono);background:transparent;color:var(--kagit);border:1px solid var(--cizgi);border-radius:999px;padding:6px 12px;cursor:pointer;margin-left:6px}
+details{background:var(--yuzey);border:1px solid var(--cizgi);border-radius:14px;margin-top:18px}
+summary{cursor:pointer;padding:13px 16px;font:600 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sis)}
+pre{margin:0;padding:16px;overflow:auto;max-height:60vh;font:12px/1.55 var(--mono);white-space:pre;border-top:1px solid var(--cizgi)}
+.alt{font:12px/1.5 var(--mono);color:var(--sis);margin-top:22px}
+</style>
+</head>
+<body>
+<header>
+  <a class="geri" href="../index.html">← Tüm sahneler</a>
+  <span class="kapi">T000064</span>
+  <label class="anahtar"><input type="checkbox" id="hareket" role="switch" aria-label="Hareketi aç"> HAREKET</label>
+</header>
+<main>
+  <div class="sahne" id="sahne" role="group" aria-label="Akışkan simülasyonu"></div>
+  <h1>Akışkan simülasyonu</h1>
+  <p class="ac">Stable Fluids: palet renkli boya bir hız alanında akar.</p>
+  <ul class="etk"><li class="t">Akışkan simülasyonu</li><li>Tasarımcı duvarı</li><li>Standart</li><li><span class="renkler"><i style="background:#07080f"></i><i style="background:#3df2ff"></i><i style="background:#ff3d9a"></i><i style="background:#7a5cff"></i></span>Şehir neonu</li></ul>
+  <p class="not" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; sahne durağan. <button type="button" id="hareket-ac">Hareketi aç</button></p>
+  <details><summary>Kaynağı gör</summary><pre>// webgl2-sivi-simulasyonu (Stable Fluids)
+register({
+  baslik: 'Akışkan simülasyonu',
+  aciklama: 'Stable Fluids: palet renkli boya bir hız alanında akar.',
+  mount: function (host, api) {
+    var c = document.createElement('canvas');
+    c.style.cssText = 'display:block;width:100%;height:100%';
+    host.appendChild(c);
+    var P = api.palette, gl = c.getContext('webgl2');
+    if (!gl || !gl.getExtension('EXT_color_buffer_float')) {
+      var m = document.createElement('div');
+      m.textContent = 'WebGL2 yok.';
+      m.style.color = P.fg;
+      host.appendChild(m);
+      return function () {};
+    }
+    var W = 256, H = 144;
+    function rgbf(h) { var n = parseInt(h.slice(1), 16); return [(n &gt;&gt; 16 &amp; 255) / 255, (n &gt;&gt; 8 &amp; 255) / 255, (n &amp; 255) / 255]; }
+    function L(p, n) { return gl.getUniformLocation(p, n); }
+    var VS = '#version 300 es\nvoid main(){vec2 p=vec2(float((gl_VertexID&lt;&lt;1)&amp;2),float(gl_VertexID&amp;2));gl_Position=vec4(p*2.0-1.0,0.0,1.0);}';
+    var HEAD = '#version 300 es\nprecision highp float;\nout vec4 o;\nuniform vec2 uTx;\n';
+    var ADV = HEAD + 'uniform sampler2D uV,uS;uniform float uDis;\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;vec2 v=texture(uV,uv).xy;o=uDis*texture(uS,uv-v*uTx);}';
+    var DIV = HEAD + 'uniform sampler2D uV;\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;float L=texture(uV,uv-vec2(uTx.x,0.)).x,R=texture(uV,uv+vec2(uTx.x,0.)).x,B=texture(uV,uv-vec2(0.,uTx.y)).y,T=texture(uV,uv+vec2(0.,uTx.y)).y;o=vec4(0.5*(R-L+T-B),0.,0.,1.);}';
+    var JAC = HEAD + 'uniform sampler2D uP,uD;\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;float s=texture(uP,uv-vec2(uTx.x,0.)).x+texture(uP,uv+vec2(uTx.x,0.)).x+texture(uP,uv-vec2(0.,uTx.y)).x+texture(uP,uv+vec2(0.,uTx.y)).x;o=vec4(0.25*(s-texture(uD,uv).x),0.,0.,1.);}';
+    var GRAD = HEAD + 'uniform sampler2D uV,uP;\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;vec2 g=0.5*vec2(texture(uP,uv+vec2(uTx.x,0.)).x-texture(uP,uv-vec2(uTx.x,0.)).x,texture(uP,uv+vec2(0.,uTx.y)).x-texture(uP,uv-vec2(0.,uTx.y)).x);o=vec4(texture(uV,uv).xy-g,0.,1.);}';
+    var SPL = HEAD + 'uniform sampler2D uS;uniform vec2 uPt;uniform vec3 uCol;uniform float uR,uAsp;\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;vec2 d=uv-uPt;d.x*=uAsp;float g=exp(-dot(d,d)/uR);o=vec4(texture(uS,uv).rgb+uCol*g,1.);}';
+    var DSP = '#version 300 es\nprecision highp float;\nout vec4 o;\nuniform sampler2D uD;uniform vec2 uRes;uniform vec3 uBg;\nvoid main(){vec3 d=texture(uD,gl_FragCoord.xy/uRes).rgb;o=vec4(uBg+(1.-uBg)*clamp(d,0.,1.),1.);}';
+    function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return x; }
+    function prog(fs) {
+      var p = gl.createProgram();
+      gl.attachShader(p, sh(gl.VERTEX_SHADER, VS));
+      gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(p); gl.useProgram(p);
+      gl.uniform2f(L(p, 'uTx'), 1 / W, 1 / H);
+      return p;
+    }
+    gl.bindVertexArray(gl.createVertexArray());
+    var pADV = prog(ADV), pDIV = prog(DIV), pJAC = prog(JAC), pGRAD = prog(GRAD), pSPL = prog(SPL), pDSP = prog(DSP);
+    gl.useProgram(pSPL);
+    gl.uniform1f(L(pSPL, 'uAsp'), W / H);
+    gl.uniform1f(L(pSPL, 'uR'), 0.0006);
+    gl.useProgram(pDSP);
+    gl.uniform3fv(L(pDSP, 'uBg'), rgbf(P.bg));
+    function fbo() {
+      var t = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, W, H, 0, gl.RGBA, gl.HALF_FLOAT, null);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      var f = gl.createFramebuffer();
+      gl.bindFramebuffer(gl.FRAMEBUFFER, f);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);
+      return { t: t, f: f };
+    }
+    function pair() {
+      var p = { a: fbo(), b: fbo() };
+      p.swap = function () { var q = p.a; p.a = p.b; p.b = q; };
+      return p;
+    }
+    function run(p, dst, list) {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, dst ? dst.f : null);
+      gl.viewport(0, 0, dst ? W : c.width, dst ? H : c.height);
+      gl.useProgram(p);
+      for (var i = 0; i &lt; list.length; i++) {
+        gl.activeTexture(gl.TEXTURE0 + i);
+        gl.bindTexture(gl.TEXTURE_2D, list[i][1]);
+        gl.uniform1i(L(p, list[i][0]), i);
+      }
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    function splat(pr, x0, y0, r, g, b) {
+      gl.useProgram(pSPL);
+      gl.uniform2f(L(pSPL, 'uPt'), x0, y0);
+      gl.uniform3f(L(pSPL, 'uCol'), r, g, b);
+      run(pSPL, pr.b, [['uS', pr.a.t]]);
+      pr.swap();
+    }
+    function advect(src, vel, dis) {
+      gl.useProgram(pADV);
+      gl.uniform1f(L(pADV, 'uDis'), dis);
+      run(pADV, src.b, [['uV', vel.t], ['uS', src.a.t]]);
+      src.swap();
+    }
+    var V = pair(), D = pair(), Pr = pair(), DV = fbo(), cols = [rgbf(P.a), rgbf(P.b), rgbf(P.c)];
+    function fit() {
+      c.width = Math.max(2, api.width * api.dpr | 0);
+      c.height = Math.max(2, api.height * api.dpr | 0);
+    }
+    fit(); api.onResize(fit);
+    function frame(tm) {
+      for (var e = 0; e &lt; 3; e++) {
+        var ph = tm * (0.6 + e * 0.23) + e * 2.1;
+        var px = 0.5 + 0.35 * Math.cos(ph), py = 0.5 + 0.3 * Math.sin(ph * 1.3 + e);
+        splat(V, px, py, -Math.sin(ph) * 2.0, Math.cos(ph * 1.3 + e) * 2.0, 0);
+        var k = cols[e];
+        splat(D, px, py, k[0] * 0.5, k[1] * 0.5, k[2] * 0.5);
+      }
+      advect(V, V.a, 0.999);
+      advect(D, V.a, 0.985);
+      run(pDIV, DV, [['uV', V.a.t]]);
+      for (var n = 0; n &lt; 20; n++) { run(pJAC, Pr.b, [['uP', Pr.a.t], ['uD', DV.t]]); Pr.swap(); }
+      run(pGRAD, V.b, [['uV', V.a.t], ['uP', Pr.a.t]]); V.swap();
+      gl.useProgram(pDSP);
+      gl.uniform2f(L(pDSP, 'uRes'), c.width, c.height);
+      run(pDSP, null, [['uD', D.a.t]]);
+    }
+    for (var s = 0; s &lt; 40; s++) frame(s * 0.05);
+    var dur = api.raf(function () { frame(api.time() / 1000 * (api.reducedMotion ? 0.2 : 1)); });
+    return function () { dur(); };
+  }
+});
+</pre></details>
+  <p class="alt">T000064 · alt-16 · 6113 B · ayrı sayfa: ağsız kutuda çalışır, başka bağlantıdan beslenmez.</p>
+</main>
+<script type="application/json" id="veri">{"kabuk":"<!doctype html>\n<html lang=\"tr\"><head><meta charset=\"utf-8\">\n<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; media-src data: blob:; worker-src blob:; font-src data:; connect-src 'none'\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>\nhtml,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--fg);font:13px/1.4 system-ui,\"Segoe UI\",sans-serif}\n#h{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;overflow:hidden!important}\ncanvas{display:block}\n<\/style><\/head>\n<body><div id=\"h\"><\/div>\n<script>window.__AYAR=/*__AYAR__*/null;<\/script>\n<script>\n/* kabuk: tek kaynak. Arayuz (srcdoc) ve hakem ayni kabugu kullanir. Modul ag, depolama ve ust pencereye erisemez (sandbox + CSP). */\n(function () {\n  var A = window.__AYAR || { palet: { bg: '#0b0a10', fg: '#f3ede2', a: '#e8c26a', b: '#b0763c', c: '#5c3b1e' }, rm: false, seed: 1, id: 'T000000' };\n  var host = document.getElementById('h'), root = document.documentElement;\n  ['bg', 'fg', 'a', 'b', 'c'].forEach(function (k) { root.style.setProperty('--' + k, A.palet[k]); });\n  var t0 = performance.now(), durduruldu = false, kare = 0, temizler = [], boyutlar = [], bitis = null, kayitli = false;\n  var raf0 = window.requestAnimationFrame.bind(window);\n  window.requestAnimationFrame = function (fn) { return raf0(function (t) { kare++; fn(t); }); };\n  function haber(m) { try { window.parent.postMessage(m, '*'); } catch (e) {} }\n  window.addEventListener('error', function (e) { haber({ t: 'hata', m: String(e.message || e) }); });\n  window.addEventListener('unhandledrejection', function (e) { haber({ t: 'hata', m: 'söz: ' + String((e.reason && e.reason.message) || e.reason) }); });\n  function rng(s) {\n    var a = (s | 0) || 1;\n    return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };\n  }\n  var api = {\n    host: host, dpr: Math.min(window.devicePixelRatio || 1, 2), reducedMotion: !!A.rm, palette: A.palet, id: A.id,\n    rng: function (s) { return rng(s == null ? (A.seed || 1) : s); },\n    time: function () { return performance.now() - t0; },\n    paused: function () { return durduruldu; },\n    raf: function (fn) {\n      var acik = true;\n      (function dongu(t) {\n        if (!acik) return;\n        if (!durduruldu) { try { fn(t); } catch (e) { haber({ t: 'hata', m: 'raf: ' + ((e && e.message) || e) }); acik = false; return; } }\n        window.requestAnimationFrame(dongu);\n      })(performance.now());\n      var dur = function () { acik = false; };\n      temizler.push(dur); return dur;\n    },\n    onResize: function (fn) { boyutlar.push(fn); return fn; },\n    on: function (el, ev, fn, o) { el.addEventListener(ev, fn, o); temizler.push(function () { el.removeEventListener(ev, fn, o); }); }\n  };\n  /* Ayristirma sirasinda clientWidth 0 doner; pencere olcusu dogrudur. Modul bu yuzden 2x2 tuvale dusmesin. */\n  Object.defineProperty(api, 'width', { get: function () { return host.clientWidth || window.innerWidth || 1; } });\n  Object.defineProperty(api, 'height', { get: function () { return host.clientHeight || window.innerHeight || 1; } });\n  window.addEventListener('resize', function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) { haber({ t: 'hata', m: 'resize: ' + ((e && e.message) || e) }); } }); });\n  window.addEventListener('message', function (e) {\n    if (e.source !== window.parent) return;\n    var m = e.data || {};\n    if (m.t === 'durdur') durduruldu = true;\n    else if (m.t === 'surdur') durduruldu = false;\n    else if (m.t === 'rm') api.reducedMotion = !!m.v;\n  });\n  window.register = function (m) {\n    if (kayitli) { haber({ t: 'hata', m: 'register iki kez çağrıldı' }); return; }\n    kayitli = true;\n    if (!m || typeof m.mount !== 'function') { haber({ t: 'hata', m: 'register({mount}) gerekli' }); return; }\n    var bekle = 0;\n    function basla() {\n      /* iframe henuz yerlesmediyse (olcu 0) en cok ~1,5 sn bekle: modul 1x1 tuvale dusup ilk karede hata vermesin (ozellikle iframe sayfa yuklenirken olusturuldugunda) */\n      if (host.clientWidth < 2 && window.innerWidth < 2 && bekle++ < 90) { window.requestAnimationFrame(basla); return; }\n      try {\n        var r = m.mount(host, api);\n        bitis = typeof r === 'function' ? r : (r && typeof r.durdur === 'function' ? r.durdur : null);\n        haber({ t: 'hazir', baslik: String(m.baslik || ''), aciklama: String(m.aciklama || '') });\n        /* ilk yerlesimden sonra bir kez boyut bildir: mount sirasindaki olcu eskimis olabilir */\n        window.requestAnimationFrame(function () { boyutlar.forEach(function (f) { try { f(api.width, api.height); } catch (e) {} }); });\n      } catch (e) { haber({ t: 'hata', m: 'mount: ' + ((e && e.message) || e) }); }\n    }\n    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', basla); else basla();\n  };\n  setInterval(function () { haber({ t: 'kare', n: kare }); }, 400);\n})();\n<\/script>\n<script>\n/*__MODUL__*/\n<\/script>\n<\/body><\/html>\n","modul":"// webgl2-sivi-simulasyonu (Stable Fluids)\nregister({\n  baslik: 'Akışkan simülasyonu',\n  aciklama: 'Stable Fluids: palet renkli boya bir hız alanında akar.',\n  mount: function (host, api) {\n    var c = document.createElement('canvas');\n    c.style.cssText = 'display:block;width:100%;height:100%';\n    host.appendChild(c);\n    var P = api.palette, gl = c.getContext('webgl2');\n    if (!gl || !gl.getExtension('EXT_color_buffer_float')) {\n      var m = document.createElement('div');\n      m.textContent = 'WebGL2 yok.';\n      m.style.color = P.fg;\n      host.appendChild(m);\n      return function () {};\n    }\n    var W = 256, H = 144;\n    function rgbf(h) { var n = parseInt(h.slice(1), 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; }\n    function L(p, n) { return gl.getUniformLocation(p, n); }\n    var VS = '#version 300 es\\nvoid main(){vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2));gl_Position=vec4(p*2.0-1.0,0.0,1.0);}';\n    var HEAD = '#version 300 es\\nprecision highp float;\\nout vec4 o;\\nuniform vec2 uTx;\\n';\n    var ADV = HEAD + 'uniform sampler2D uV,uS;uniform float uDis;\\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;vec2 v=texture(uV,uv).xy;o=uDis*texture(uS,uv-v*uTx);}';\n    var DIV = HEAD + 'uniform sampler2D uV;\\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;float L=texture(uV,uv-vec2(uTx.x,0.)).x,R=texture(uV,uv+vec2(uTx.x,0.)).x,B=texture(uV,uv-vec2(0.,uTx.y)).y,T=texture(uV,uv+vec2(0.,uTx.y)).y;o=vec4(0.5*(R-L+T-B),0.,0.,1.);}';\n    var JAC = HEAD + 'uniform sampler2D uP,uD;\\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;float s=texture(uP,uv-vec2(uTx.x,0.)).x+texture(uP,uv+vec2(uTx.x,0.)).x+texture(uP,uv-vec2(0.,uTx.y)).x+texture(uP,uv+vec2(0.,uTx.y)).x;o=vec4(0.25*(s-texture(uD,uv).x),0.,0.,1.);}';\n    var GRAD = HEAD + 'uniform sampler2D uV,uP;\\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;vec2 g=0.5*vec2(texture(uP,uv+vec2(uTx.x,0.)).x-texture(uP,uv-vec2(uTx.x,0.)).x,texture(uP,uv+vec2(0.,uTx.y)).x-texture(uP,uv-vec2(0.,uTx.y)).x);o=vec4(texture(uV,uv).xy-g,0.,1.);}';\n    var SPL = HEAD + 'uniform sampler2D uS;uniform vec2 uPt;uniform vec3 uCol;uniform float uR,uAsp;\\nvoid main(){vec2 uv=gl_FragCoord.xy*uTx;vec2 d=uv-uPt;d.x*=uAsp;float g=exp(-dot(d,d)/uR);o=vec4(texture(uS,uv).rgb+uCol*g,1.);}';\n    var DSP = '#version 300 es\\nprecision highp float;\\nout vec4 o;\\nuniform sampler2D uD;uniform vec2 uRes;uniform vec3 uBg;\\nvoid main(){vec3 d=texture(uD,gl_FragCoord.xy/uRes).rgb;o=vec4(uBg+(1.-uBg)*clamp(d,0.,1.),1.);}';\n    function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); return x; }\n    function prog(fs) {\n      var p = gl.createProgram();\n      gl.attachShader(p, sh(gl.VERTEX_SHADER, VS));\n      gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));\n      gl.linkProgram(p); gl.useProgram(p);\n      gl.uniform2f(L(p, 'uTx'), 1 / W, 1 / H);\n      return p;\n    }\n    gl.bindVertexArray(gl.createVertexArray());\n    var pADV = prog(ADV), pDIV = prog(DIV), pJAC = prog(JAC), pGRAD = prog(GRAD), pSPL = prog(SPL), pDSP = prog(DSP);\n    gl.useProgram(pSPL);\n    gl.uniform1f(L(pSPL, 'uAsp'), W / H);\n    gl.uniform1f(L(pSPL, 'uR'), 0.0006);\n    gl.useProgram(pDSP);\n    gl.uniform3fv(L(pDSP, 'uBg'), rgbf(P.bg));\n    function fbo() {\n      var t = gl.createTexture();\n      gl.bindTexture(gl.TEXTURE_2D, t);\n      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, W, H, 0, gl.RGBA, gl.HALF_FLOAT, null);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);\n      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);\n      var f = gl.createFramebuffer();\n      gl.bindFramebuffer(gl.FRAMEBUFFER, f);\n      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0);\n      return { t: t, f: f };\n    }\n    function pair() {\n      var p = { a: fbo(), b: fbo() };\n      p.swap = function () { var q = p.a; p.a = p.b; p.b = q; };\n      return p;\n    }\n    function run(p, dst, list) {\n      gl.bindFramebuffer(gl.FRAMEBUFFER, dst ? dst.f : null);\n      gl.viewport(0, 0, dst ? W : c.width, dst ? H : c.height);\n      gl.useProgram(p);\n      for (var i = 0; i < list.length; i++) {\n        gl.activeTexture(gl.TEXTURE0 + i);\n        gl.bindTexture(gl.TEXTURE_2D, list[i][1]);\n        gl.uniform1i(L(p, list[i][0]), i);\n      }\n      gl.drawArrays(gl.TRIANGLES, 0, 3);\n    }\n    function splat(pr, x0, y0, r, g, b) {\n      gl.useProgram(pSPL);\n      gl.uniform2f(L(pSPL, 'uPt'), x0, y0);\n      gl.uniform3f(L(pSPL, 'uCol'), r, g, b);\n      run(pSPL, pr.b, [['uS', pr.a.t]]);\n      pr.swap();\n    }\n    function advect(src, vel, dis) {\n      gl.useProgram(pADV);\n      gl.uniform1f(L(pADV, 'uDis'), dis);\n      run(pADV, src.b, [['uV', vel.t], ['uS', src.a.t]]);\n      src.swap();\n    }\n    var V = pair(), D = pair(), Pr = pair(), DV = fbo(), cols = [rgbf(P.a), rgbf(P.b), rgbf(P.c)];\n    function fit() {\n      c.width = Math.max(2, api.width * api.dpr | 0);\n      c.height = Math.max(2, api.height * api.dpr | 0);\n    }\n    fit(); api.onResize(fit);\n    function frame(tm) {\n      for (var e = 0; e < 3; e++) {\n        var ph = tm * (0.6 + e * 0.23) + e * 2.1;\n        var px = 0.5 + 0.35 * Math.cos(ph), py = 0.5 + 0.3 * Math.sin(ph * 1.3 + e);\n        splat(V, px, py, -Math.sin(ph) * 2.0, Math.cos(ph * 1.3 + e) * 2.0, 0);\n        var k = cols[e];\n        splat(D, px, py, k[0] * 0.5, k[1] * 0.5, k[2] * 0.5);\n      }\n      advect(V, V.a, 0.999);\n      advect(D, V.a, 0.985);\n      run(pDIV, DV, [['uV', V.a.t]]);\n      for (var n = 0; n < 20; n++) { run(pJAC, Pr.b, [['uP', Pr.a.t], ['uD', DV.t]]); Pr.swap(); }\n      run(pGRAD, V.b, [['uV', V.a.t], ['uP', Pr.a.t]]); V.swap();\n      gl.useProgram(pDSP);\n      gl.uniform2f(L(pDSP, 'uRes'), c.width, c.height);\n      run(pDSP, null, [['uD', D.a.t]]);\n    }\n    for (var s = 0; s < 40; s++) frame(s * 0.05);\n    var dur = api.raf(function () { frame(api.time() / 1000 * (api.reducedMotion ? 0.2 : 1)); });\n    return function () { dur(); };\n  }\n});\n","ayar":{"palet":{"bg":"#07080f","fg":"#e9f1ff","a":"#3df2ff","b":"#ff3d9a","c":"#7a5cff"},"rm":false,"seed":64,"id":"T000064"},"baslik":"Akışkan simülasyonu","t":"webgl2-sivi-simulasyonu"}</script>
+<script>
+(function () {
+  var V = JSON.parse(document.getElementById('veri').textContent), mq = matchMedia('(prefers-reduced-motion: reduce)'), kayit = null;
+  try { kayit = localStorage.getItem('sergi_hareket'); } catch (e) {}
+  var hareket = kayit === null ? !mq.matches : kayit === '1', secildi = kayit !== null;
+  var anahtar = document.getElementById('hareket'), not = document.getElementById('hareket-notu'), sahne = document.getElementById('sahne');
+  function kur() {
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = V.baslik; V.ayar.rm = !hareket;
+    if (V.t === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope';  /* yalniz bu teknik hareket sensorunu kullanir (ag yok, kutu kapali) */
+    f.srcdoc = V.kabuk.replace('/*__AYAR__*/null', function () { return JSON.stringify(V.ayar); }).replace('/*__MODUL__*/', function () { return V.modul; });
+    sahne.textContent = ''; sahne.appendChild(f);
+  }
+  function guncelle(v, kaydet) {
+    hareket = v; anahtar.checked = v;
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    not.hidden = hareket || secildi; kur();
+  }
+  anahtar.addEventListener('change', function () { guncelle(anahtar.checked, true); });
+  document.getElementById('hareket-ac').addEventListener('click', function () { guncelle(true, true); });
+  anahtar.checked = hareket; not.hidden = hareket || secildi; kur();
+})();
+</script>
+</body>
+</html>

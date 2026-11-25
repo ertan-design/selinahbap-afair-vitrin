@@ -436,7 +436,7 @@
     return KABUK.replace('/*__AYAR__*/null', function () { return JSON.stringify(ayar); }).replace('/*__MODUL__*/', function () { return m.kod; });
   }
   function iframeYap(m, baslik) {
-    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = baslik; f.srcdoc = srcdoc(m, !hareket); return f;
+    var f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-scripts'); f.title = baslik; if (T[m.t][0] === 'js-parallaks-jiroskop') f.allow = 'accelerometer; gyroscope'; f.srcdoc = srcdoc(m, !hareket); return f;
   }
 
   /* ---- yayin sahnesi: CSS 3B podyum (ornek, canli yayin degil) ---- */
@@ -494,7 +494,7 @@
         '<ul class="etiketler"><li class="teknik">' + esc(T[m.t][1]) + '</li><li>' + esc(B[m.c][1]) + '</li>' +
         '<li><span class="renkler" title="' + esc(p[1]) + '"><i style="background:' + p[2] + '"></i><i style="background:' + p[4] + '"></i><i style="background:' + p[5] + '"></i><i style="background:' + p[6] + '"></i></span></li></ul>' +
         '<details class="ayrinti"><summary>Ayrıntı</summary><div class="kart-satir"><span>' + kid(m.no) + '</span><span>' + esc(m.yazar) + '</span><span>' + sayi.format(m.bayt) + ' B</span><span>' + esc(K[m.k][1]) + '</span><span>' + esc(p[1]) + '</span><span title="Gerçek tarayıcıda ekran dolu, hata yok">' + (m.gorsel ? 'tarayıcı hakemi ✓' : 'tarayıcı hakemi yok') + '</span><span title="Modülü yazmayan başka bir GPT ekran görüntüsü ve kaynakla puanladı">' + (m.r ? 'model hakemi ' + String(m.r[0]).replace('.', ',') + '/5 (' + m.r[1] + ')' + (m.r[2] ? '' : ' ⚠ dürüstlük itirazı') : 'model hakemi bekliyor') + '</span></div></details>' +
-        '<div class="kart-satir"><button class="kucuk" data-islem="buyut" type="button">Büyüt</button><button class="kucuk" data-islem="kaynak" type="button">Kaynağı gör</button></div></div>';
+        '<div class="kart-satir"><button class="kucuk" data-islem="buyut" type="button">Büyüt</button><button class="kucuk" data-islem="kaynak" type="button">Kaynağı gör</button>' + (S.yayin && S.sahne_taban ? '<a class="kucuk" href="' + S.sahne_taban + kid(m.no) + '.html" rel="noopener">Ayrı sayfa ↗</a>' : '') + '</div></div>';
       $('.oynat', a).addEventListener('click', function () { kartBaslat(a, true); });
       $('[data-islem=buyut]', a).addEventListener('click', function () { buyut(m); });
       $('[data-islem=kaynak]', a).addEventListener('click', function () { kaynakGoster(m); });
