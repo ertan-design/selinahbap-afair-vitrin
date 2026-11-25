@@ -54,6 +54,7 @@ html:not(.hareketli) .anahtar input::after { transition: none; }
   background: radial-gradient(900px 560px at 66% 26%, rgba(231, 208, 160, .09), transparent 62%), #07070a; }
 #hero { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
 .kahraman.tutuluyor #hero { cursor: grabbing; }
+.kahraman.tutuluyor { user-select: none; -webkit-user-select: none; }
 .kahraman::after { content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(7, 7, 10, .88) 0%, rgba(7, 7, 10, .3) 40%, rgba(7, 7, 10, 0) 58%), linear-gradient(180deg, rgba(7, 7, 10, 0) 58%, var(--ink) 100%); }
 .kh-icerik { position: relative; z-index: 2; padding: 120px 0 56px; pointer-events: none; }
@@ -67,6 +68,8 @@ html:not(.hareketli) .anahtar input::after { transition: none; }
 .sayaclar { display: flex; gap: clamp(22px, 4vw, 48px); margin-top: 38px; flex-wrap: wrap; }
 .sayaclar b { display: block; font: 600 clamp(28px, 4.4vw, 46px)/1 var(--serif); color: var(--kagit); }
 .sayaclar span { font: 600 11px var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--sis); }
+.hareket-notu { margin: 20px 0 0; font-size: 13px; color: var(--sis); max-width: 46ch; }
+.hareket-notu .kucuk { margin-left: 6px; }
 .hero-ipucu { display: flex; gap: 22px; flex-wrap: wrap; margin: 30px 0 0; font: 600 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--sis); }
 .hero-ipucu span::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 9px; border-radius: 50%; background: var(--gul); vertical-align: 1px; }
 .durum-seridi { position: relative; z-index: 2; background: #0b0b10; color: var(--sis); border-bottom: 1px solid var(--cizgi); font: 600 11px/1.4 var(--mono); letter-spacing: .14em; padding: 8px 16px; text-align: center; }
@@ -212,6 +215,7 @@ dialog pre { margin: 0; padding: 18px; max-height: 68vh; overflow: auto; font: 1
     <h1 id="h-ana">Kapıyı aç. <em>Sahne senin.</em></h1>
     <p class="giris-yazi">Her kapının ardında canlı bir sahne var. Kumaşı sürükle, rüzgârı sen yönlendir.</p>
     <div class="btnler"><a class="btn dolu" href="#sergi">Sahneleri gez</a><a class="btn" href="#katki">Kapı al</a></div>
+    <p class="hareket-notu" id="hareket-notu" hidden>Cihazın hareketi azaltıyor; kumaş yalnız sen dokununca oynar. <button class="kucuk" id="hareket-ac" type="button">Hareketi aç</button></p>
     <div class="sayaclar" id="sayaclar" aria-live="polite"></div>
     <p class="hero-ipucu" aria-hidden="true"><span>sürükle: 360° döndür</span><span>imleç: rüzgârı yönlendir</span></p>
   </div>
@@ -357,10 +361,14 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
   var anahtar = $('#hareket'), mq = window.matchMedia('(prefers-reduced-motion: reduce)'), hareket;
   try { var kayit = localStorage.getItem('sergi_hareket'); hareket = kayit === null ? !mq.matches : kayit === '1'; } catch (e) { hareket = !mq.matches; }
   anahtar.addEventListener('change', function () { hareketKur(anahtar.checked, true); });
+  var secildi = false; try { secildi = localStorage.getItem('sergi_hareket') !== null; } catch (e) {}
+  var hareketNotu = $('#hareket-notu'), hareketAc = $('#hareket-ac');
+  function notuGuncelle() { if (hareketNotu) hareketNotu.hidden = hareket || secildi; }
+  if (hareketAc) hareketAc.addEventListener('click', function () { hareketKur(true, true); });
   function hareketKur(v, kaydet) {
     hareket = v; anahtar.checked = v; document.documentElement.classList.toggle('hareketli', v);
-    if (kaydet) { try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
-    heroDurum(); canliYenile(); sahneKur();
+    if (kaydet) { secildi = true; try { localStorage.setItem('sergi_hareket', v ? '1' : '0'); } catch (e) {} }
+    notuGuncelle(); heroDurum(); canliYenile(); sahneKur();
   }
 
   /* ---- sayaclar ---- */
@@ -372,7 +380,7 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
      Imlec ruzgari yonlendirir, surukleme 360 derece dondurur; ok tuslari ve bosluk da calisir. Kumas, golge ve iplikler hesaplanir; video ya da dongu animasyonu degildir.
      Cizim: WebGL2 (puruzsuz normaller, kumas dokusu, golge); yoksa 2B tuval yedegi. Fizik her iki yolda ayni. */
   var hero = { c: null, g: null, x: null, sec: null, W: 0, H: 0, dpr: 1, raf: 0, gorunur: true, kum: [], ip: null, dp: null, perm: null, qk: null, qa: null, qi: null,
-    dar: false, yaw: 0.42, pitch: 0.14, yawV: 0, surukle: false, sx: 0, sy: 0, bosta: 9, t: 0, son: 0, birik: 0, kare: 0, ms: 8, iter: 6, yavas: 0,
+    dar: false, sw: false, canli: 0, hazir: false, yaw: 0.42, pitch: 0.14, yawV: 0, surukle: false, sx: 0, sy: 0, bosta: 9, t: 0, son: 0, birik: 0, kare: 0, ms: 8, iter: 6, yavas: 0,
     rz: { x: 0.25, y: 0.1, z: 0.55 }, hd: { x: 0.25, y: 0.1, z: 0.55 }, esme: 0.4, ix: 0, iy: 0, it: 0 };
   var LW = (function () { var l = Math.sqrt(0.55 * 0.55 + 0.62 * 0.62 + 0.55 * 0.55); return [-0.55 / l, 0.62 / l, 0.55 / l]; })();
   var YER = -2.0;  /* zemin y */
@@ -454,9 +462,9 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
   function heroAdim(dt) {
     hero.t += dt;
     var rz = hero.rz, hd = hero.hd, ks = Math.min(1, dt * 2.6);
-    if (hero.bosta > 4) { var t = hero.t; hd.x = 0.25 + 0.35 * Math.sin(t * 0.31); hd.y = 0.1; hd.z = 0.55 + 0.3 * Math.sin(t * 0.23 + 1); }
+    if (hero.bosta > 4) { var t = hero.t; if (hareket || !hero.hazir) { hd.x = 0.25 + 0.35 * Math.sin(t * 0.31); hd.y = 0.1; hd.z = 0.55 + 0.3 * Math.sin(t * 0.23 + 1); } else { hd.x = 0; hd.y = 0.05; hd.z = 0.12; } }
     rz.x += (hd.x - rz.x) * ks; rz.y += (hd.y - rz.y) * ks; rz.z += (hd.z - rz.z) * ks;
-    hero.esme += ((hero.bosta > 1.5 ? 0.4 : hero.esme) - hero.esme) * Math.min(1, dt * 0.9);
+    hero.esme += (((hero.bosta > 1.5) ? ((hareket || !hero.hazir) ? 0.4 : 0.1) : hero.esme) - hero.esme) * Math.min(1, dt * 0.9);
     for (var i = 0; i < hero.kum.length; i++) kumasAdim(hero.kum[i], dt, hero.t);
     var p = hero.ip, a, kt = Math.min(1, dt * 0.9);
     for (a = 0; a < p.n; a++) {
@@ -474,7 +482,7 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
   var HFS = ['#version 300 es', 'precision highp float; in vec3 vN; in vec3 vP; in vec2 vUV; out vec4 o;',
     'uniform vec3 uL; uniform float uDist; uniform float uTime; uniform float uSeed; uniform vec3 uCa; uniform vec3 uCb; uniform vec3 uCc; uniform vec3 uCf;',
     'void main(){ vec3 n = normalize(vN); vec3 V = normalize(vec3(0., 0., uDist) - vP); if (dot(n, V) < 0.) n = -n;',
-    '  float ndl = dot(n, uL); float dif = ndl > 0. ? ndl : -ndl * 0.3; float nv = clamp(dot(n, V), 0., 1.); float rim = pow(1. - nv, 2.4);',
+    '  float ndl = dot(n, uL); float dif = ndl > 0. ? ndl : -ndl * 0.5; float nv = clamp(dot(n, V), 0., 1.); float rim = pow(1. - nv, 2.4);',
     '  float u = 0.5 + 0.5 * sin(dot(n, vec3(2.7, 1.9, 1.3)) + uTime * 0.22 + uSeed * 1.7 + vUV.y * 1.5);',
     '  vec3 col = u < 0.5 ? mix(uCc, uCb, u * 2.) : mix(uCb, uCa, u * 2. - 1.);',
     '  float weave = 1. + 0.03 * sin(vUV.x * 300.) * sin(vUV.y * 190.); float curv = length(dFdx(n)) + length(dFdy(n)); float ao = 1. - clamp(curv * 2.4, 0., 0.45);',
@@ -488,8 +496,17 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
     'void main(){ vec3 c = uR * (aP + vec3(0., 0.8, 0.)); float w = uD.x - c.z;',
     '  gl_Position = vec4(uC.x * c.x + uC.z * w, uC.y * c.y + uC.w * w, uD.y * w + uD.z, w); vK = aK; }'].join('\n');
   var HIFS = ['#version 300 es', 'precision mediump float; in vec4 vK; out vec4 o; void main(){ o = vec4(vK.rgb * vK.a, vK.a); }'].join('\n');
+  /* GPU yoksa (uzak masaustu, SwiftShader) cozunurluk dusurulur: yumusak ama akici kalir */
+  function yazilimMi() {
+    try {
+      var tc = document.createElement('canvas'), tg = tc.getContext('webgl2'); if (!tg) return false;
+      var ri = tg.getExtension('WEBGL_debug_renderer_info'), rn = ri ? String(tg.getParameter(ri.UNMASKED_RENDERER_WEBGL)) : '', yz = /swiftshader|llvmpipe|software|basic render/i.test(rn);
+      var ky = tg.getExtension('WEBGL_lose_context'); if (ky) ky.loseContext();
+      return yz;
+    } catch (e) { return false; }
+  }
   function glKur(c) {
-    var gl = c.getContext('webgl2', { antialias: true, alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' });
+    var gl = c.getContext('webgl2', { antialias: !hero.sw, alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance' });
     if (!gl) return null;
     function sh(t, s) { var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; }
     function pr(vs, fs, adlar) {
@@ -630,7 +647,7 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
       q = perm[m]; var Q = kum[hero.qk[q]], b0 = hero.qa[q], nx3 = Q.nx, b1 = b0 + 1, b2 = b0 + nx3, b3 = b2 + 1;
       var nx_ = Q.NX[b0] + Q.NX[b1] + Q.NX[b2] + Q.NX[b3], ny_ = Q.NY[b0] + Q.NY[b1] + Q.NY[b2] + Q.NY[b3], nz_ = Q.NZ[b0] + Q.NZ[b1] + Q.NZ[b2] + Q.NZ[b3], nl = Math.sqrt(nx_ * nx_ + ny_ * ny_ + nz_ * nz_) || 1;
       nx_ /= nl; ny_ /= nl; nz_ /= nl; if (nz_ < 0) { nx_ = -nx_; ny_ = -ny_; nz_ = -nz_; }
-      var ndl = nx_ * Lx + ny_ * Ly + nz_ * Lz, dif = ndl > 0 ? ndl : -ndl * 0.3, rim = Math.pow(1 - nz_, 2.3);
+      var ndl = nx_ * Lx + ny_ * Ly + nz_ * Lz, dif = ndl > 0 ? ndl : -ndl * 0.5, rim = Math.pow(1 - nz_, 2.3);
       var u = 0.5 + 0.5 * Math.sin(nx_ * 2.7 + ny_ * 1.9 + t * 0.22 + hero.qk[q] * 1.7), u2 = u * 2, ra, rb, rc, r, g, bl;
       ra = Q.ra; rb = Q.rb; rc = Q.rc;
       if (u2 < 1) { r = rc[0] + (rb[0] - rc[0]) * u2; g = rc[1] + (rb[1] - rc[1]) * u2; bl = rc[2] + (rb[2] - rc[2]) * u2; } else { var v2 = u2 - 1; r = rb[0] + (ra[0] - rb[0]) * v2; g = rb[1] + (ra[1] - rb[1]) * v2; bl = rb[2] + (ra[2] - rb[2]) * v2; }
@@ -652,20 +669,22 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
   function heroCiz() { if (hero.g) heroCizGL(); else heroCiz2D(); }
 
   function heroDongu(ts) {
-    if (!(hareket && hero.gorunur)) { hero.raf = 0; return; }
-    var t0 = performance.now(), dt = hero.son ? Math.min((ts - hero.son) / 1000, 0.05) : 1 / 60; hero.son = ts; hero.bosta += dt; hero.birik += dt;
+    if (!((hareket || hero.canli > 0) && hero.gorunur)) { hero.raf = 0; if (!hareket) heroCiz(); return; }
+    var t0 = performance.now(), dt = hero.son ? Math.min((ts - hero.son) / 1000, 0.05) : 1 / 60; hero.son = ts; hero.bosta += dt; hero.birik += dt; if (!hareket) hero.canli -= dt;
     var n = 0; while (hero.birik >= 1 / 60 && n < 3) { heroAdim(1 / 60); hero.birik -= 1 / 60; n++; } if (n === 3) hero.birik = 0;
-    if (!hero.surukle) { hero.yaw += hero.yawV * dt; hero.yawV *= Math.pow(0.05, dt); if (hero.bosta > 3.5) hero.yaw += 0.16 * dt; }
+    if (!hero.surukle) { hero.yaw += hero.yawV * dt; hero.yawV *= Math.pow(0.05, dt); if (hareket && hero.bosta > 3.5) hero.yaw += 0.16 * dt; }
     heroCiz(); hero.kare++;
     var ms = performance.now() - t0; hero.ms += (ms - hero.ms) * 0.08;
     if (hero.ms > 15) { hero.yavas++; if (hero.yavas > 40) { hero.yavas = 0; if (hero.iter > 3) hero.iter--; else if (hero.dpr > 1) { hero.dpr = 1; heroBoyut(); } } } else if (hero.yavas > 0) hero.yavas--;
     hero.raf = requestAnimationFrame(heroDongu);
   }
-  function heroDurum() { if (hero.raf) { cancelAnimationFrame(hero.raf); hero.raf = 0; } hero.son = 0; if (hareket && hero.gorunur) hero.raf = requestAnimationFrame(heroDongu); else heroCiz(); }
+  /* hareket azaltilmis olsa bile kullanici eylemi (imlec, surukleme, tus) kumasi gercekten oynatir: eylemden sonra 3,5 sn fizik calisir, sonra durur */
+  function heroEtkin() { hero.bosta = 0; if (!hareket) { hero.canli = 3.5; if (!hero.raf && hero.gorunur) { hero.son = 0; hero.raf = requestAnimationFrame(heroDongu); } } }
+  function heroDurum() { if (hero.raf) { cancelAnimationFrame(hero.raf); hero.raf = 0; } hero.son = 0; hero.canli = 0; if (hareket && hero.gorunur) hero.raf = requestAnimationFrame(heroDongu); else heroCiz(); }
   function heroBoyut() {
     var c = hero.c; if (!c) return;
     var W = Math.max(2, c.clientWidth), H = Math.max(2, c.clientHeight);
-    hero.dpr = Math.min(window.devicePixelRatio || 1, W > 1000 ? 1.5 : 2); if (hero.yavas < 0) hero.dpr = 1;
+    hero.dpr = Math.min(window.devicePixelRatio || 1, W > 1000 ? 1.5 : 2) * (hero.sw ? 0.6 : 1);
     c.width = Math.round(W * hero.dpr); c.height = Math.round(H * hero.dpr); hero.W = W; hero.H = H; heroCiz();
   }
   function heroImlec(e) {
@@ -674,7 +693,7 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
     if (hero.it) hero.esme = Math.min(2.0, hero.esme + hiz / 1800);
     hero.ix = e.clientX; hero.iy = e.clientY; hero.it = now;
     if (nx < 0 || nx > 1 || ny < 0 || ny > 1) return;
-    hero.hd.x = (nx * 2 - 1) * 2.3; hero.hd.z = (0.5 - ny) * 2 * 1.5 + 0.4; hero.hd.y = 0.1 + (0.5 - ny) * 0.5; hero.bosta = 0;
+    hero.hd.x = (nx * 2 - 1) * 2.3; hero.hd.z = (0.5 - ny) * 2 * 1.5 + 0.4; hero.hd.y = 0.1 + (0.5 - ny) * 0.5; heroEtkin();
     if (hero.surukle) {
       hero.yaw += (e.clientX - hero.sx) * 0.009; hero.pitch = Math.max(-0.3, Math.min(0.55, hero.pitch + (e.clientY - hero.sy) * 0.004)); hero.yawV = (e.clientX - hero.sx) * 0.9;
       hero.sx = e.clientX; hero.sy = e.clientY; if (!(hareket && hero.gorunur)) heroCiz();
@@ -682,7 +701,7 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
   }
   function heroTut(e) {
     if (e.button > 0 || (e.target.closest && e.target.closest('a,button,input,select,textarea,summary'))) return;
-    hero.surukle = true; hero.sx = e.clientX; hero.sy = e.clientY; hero.bosta = 0; hero.sec.classList.add('tutuluyor');
+    hero.surukle = true; hero.sx = e.clientX; hero.sy = e.clientY; heroEtkin(); hero.sec.classList.add('tutuluyor');
     try { hero.sec.setPointerCapture(e.pointerId); } catch (x) {}
   }
   function heroBirak(e) { hero.surukle = false; hero.sec.classList.remove('tutuluyor'); try { hero.sec.releasePointerCapture(e.pointerId); } catch (x) {} }
@@ -690,24 +709,25 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
     var k = e.key, d = true;
     if (k === 'ArrowLeft') hero.yawV -= 1.3; else if (k === 'ArrowRight') hero.yawV += 1.3;
     else if (k === 'ArrowUp') hero.pitch = Math.max(-0.3, hero.pitch - 0.06); else if (k === 'ArrowDown') hero.pitch = Math.min(0.55, hero.pitch + 0.06);
-    else if (k === ' ' || k === 'Enter') { hero.esme = 2.0; hero.hd.x = (Math.random() * 2 - 1) * 2.6; hero.hd.z = (Math.random() * 2 - 1) * 1.8 + 0.5; hero.bosta = 0; }
+    else if (k === ' ' || k === 'Enter') { hero.esme = 2.0; hero.hd.x = (Math.random() * 2 - 1) * 2.6; hero.hd.z = (Math.random() * 2 - 1) * 1.8 + 0.5; }
     else d = false;
-    if (d) { e.preventDefault(); hero.bosta = 0; if (!(hareket && hero.gorunur)) { hero.yaw += hero.yawV * 0.05; hero.yawV = 0; heroCiz(); } }
+    if (d) { e.preventDefault(); heroEtkin(); if (!(hareket && hero.gorunur)) { hero.yaw += hero.yawV * 0.05; hero.yawV = 0; heroCiz(); } }
   }
   function heroKur() {
     var c = $('#hero'), sec = $('#giris'); hero.c = c; hero.sec = sec; hero.dar = (c.clientWidth || window.innerWidth) < 700;
+    hero.sw = yazilimMi();
     try { hero.g = glKur(c); } catch (e) { hero.g = null; var nc = c.cloneNode(false); c.parentNode.replaceChild(nc, c); c = nc; hero.c = nc; }  /* WebGL derlenemediyse tuvali yenile: 2B baglam alinabilsin */
     if (!hero.g) { hero.x = c.getContext('2d', { alpha: true }); if (!hero.x) { c.style.background = 'radial-gradient(circle at 70% 30%, #3a2f18, #09090d 62%)'; return; } }
     kumaslariYap(!!hero.g); if (hero.g) glKumasHazirla();
-    if (!hero.g) hero.iter = 5;
+    if (!hero.g) hero.iter = 5; else if (hero.sw) hero.iter = 4;
     for (var s = 0; s < 150; s++) heroAdim(1 / 60);
-    heroBoyut();
+    hero.hazir = true; heroBoyut();
     if ('ResizeObserver' in window) new ResizeObserver(heroBoyut).observe(sec); else window.addEventListener('resize', heroBoyut);
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { hero.gorunur = es[0].isIntersecting; heroDurum(); }).observe(sec);
     sec.addEventListener('pointermove', heroImlec, { passive: true }); sec.addEventListener('pointerdown', heroTut);
     sec.addEventListener('pointerup', heroBirak); sec.addEventListener('pointercancel', heroBirak); c.addEventListener('keydown', heroTus);
     window.__SERGI_HERO = {
-      durum: function () { return { yaw: hero.yaw, pitch: hero.pitch, ruzgar: [hero.rz.x, hero.rz.y, hero.rz.z], hedef: [hero.hd.x, hero.hd.y, hero.hd.z], esme: hero.esme, kare: hero.kare, ms: hero.ms, kumas: hero.kum.length, calisiyor: !!hero.raf, iter: hero.iter, dpr: hero.dpr, boy: [hero.W, hero.H], gl: !!hero.g, parca: hero.perm.length }; },
+      durum: function () { return { yaw: hero.yaw, pitch: hero.pitch, ruzgar: [hero.rz.x, hero.rz.y, hero.rz.z], hedef: [hero.hd.x, hero.hd.y, hero.hd.z], esme: hero.esme, kare: hero.kare, ms: hero.ms, kumas: hero.kum.length, calisiyor: !!hero.raf, canli: hero.canli, iter: hero.iter, dpr: hero.dpr, boy: [hero.W, hero.H], gl: !!hero.g, sw: hero.sw, parca: hero.perm.length }; },
       ileri: function (n) { for (var i = 0; i < n; i++) heroAdim(1 / 60); heroCiz(); }
     };
   }
@@ -883,7 +903,7 @@ window.SERGI={"sema":"ryte.sergi.veri.v1","zaman":"2026-11-24T21:37:05.592+00:00
   $('#alt-bilgi').textContent = 'Son defter olayı ' + S.zaman + ' · defter ' + S.sayac.defter_olay + ' olay (' + (S.sayac.defter_saglam ? 'zincir sağlam' : 'ZİNCİR BOZUK') + ') · ' + S.kutu;
 
   /* ---- baslat ---- */
-  document.documentElement.classList.toggle('hareketli', hareket); anahtar.checked = hareket;
+  document.documentElement.classList.toggle('hareketli', hareket); anahtar.checked = hareket; notuGuncelle();
   try { heroKur(); } catch (e) { $('#hero').style.background = 'radial-gradient(circle at 70% 30%, #2b3410, #09090d 62%)'; }
   heroDurum(); mozaik(); haritaKur(); kartlariKur(); sahneKur();
 })();
